@@ -1,5 +1,5 @@
 '''
-TBD Not Solved yet
+TBD Check matrix list for symbol, add num to list, sum list
 '''
 import numpy as np
 import re
@@ -60,5 +60,5 @@ for idx, sub_list_string in enumerate(matrix_symbols_pos):
             check_number = matrix_symbols[idx][idy]
             check_matrix = matrix_main[col_b:(col_b + col_e), raw_b:idx_num[1]+2]
             print(check_number)
-            print(check_matrix.tolist())
+            print(check_matrix.tolist())   # if this contains any symbol - then add check number to list
 
