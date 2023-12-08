@@ -11,6 +11,7 @@ matrix_symbols_pos = []
 matrix_raw = []
 matrix_base = []
 numbers_list = []
+total_sum = 0
 
 with open(elf_file) as elf_txt:
     for line in elf_txt.readlines():
@@ -37,13 +38,10 @@ print(matrix_symbols_pos)   # pos nums for checking
 matrix_main = np.array(matrix_base)
 raws_num = len(matrix_symbols)
 print(matrix_main)
-# print(matrix_main[0:3, 0:3])
 
 for idx, sub_list_string in enumerate(matrix_symbols_pos):
     if len(sub_list_string) > 0:
-        # print(idx, sub_list_string)
         for idy, idx_num in enumerate(sub_list_string):
-            # print(idx_num[0], idx_num[1])
             if raws_num > idx > 0:
                 col_b = idx - 1
                 col_e = 3
@@ -54,11 +52,14 @@ for idx, sub_list_string in enumerate(matrix_symbols_pos):
                 raw_b = idx_num[0] - 1
             else:
                 raw_b = idx_num[0]
-            # print(matrix_main[raw_b:idx_num[1]+2, col_b:col_b+2])
-            # print(idx, raws_num, col_b, col_e)
-            # print(matrix_symbols[idx][idy])
             check_number = matrix_symbols[idx][idy]
             check_matrix = matrix_main[col_b:(col_b + col_e), raw_b:idx_num[1]+2]
-            print(check_number)
-            print(check_matrix.tolist())   # if this contains any symbol - then add check number to list
+            check_matrix_list = check_matrix.tolist()
+            check_str = ''
+            for sub_chm in check_matrix_list:
+                check_str += ''.join([i for i in sub_chm if not i.isdigit()]).replace(' ', '')
+            if len(check_str) > 0:
+                total_sum += int(check_number)
 
+
+print(total_sum)
