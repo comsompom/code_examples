@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Add The Person image for recognizing</title>
+</head>
+<body>
+<form action="{{ url_for('upload_file') }}" enctype="multipart/form-data" method="POST">
+  <input name="img" type="file"/>
+  <input type="submit">
+</form>
+
+{% if img %}
+<h1>Person Image</h1>
+<h1>{{ img }}</h1>
+<img src="{{ img }}">
+{% else %}
+<h1>Person Image will be render here...</h1>
+{% endif %}
+
+</body>
+</html>
