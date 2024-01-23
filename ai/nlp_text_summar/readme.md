@@ -30,7 +30,7 @@ And create the same folder structure.
 
 To build the docker image run:
 ```
-docker build -t face_rec_flask . 
+docker build -t python-nlp . 
 ```
 this will create the standalone docker image.
 
@@ -41,7 +41,7 @@ docker images
 
 to run the docker container run the command:
 ```
-docker run -p 8000:8000 face_rec_flask
+docker run -p 8000:8000 python-nlp
 ```
 
 then in the browser open local link and use it
