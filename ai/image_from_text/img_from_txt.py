@@ -34,7 +34,7 @@ def summarize_text(input_text: str) -> str:
 
 def image_creator(prompt: str, neg_prompt: str, img_name: str) -> None:
     model_id = DIFFUSERS_MODEL
-    pipe = StableDiffusionPipeline.from_pretrained(model_id)
+    pipe = StableDiffusionPipeline.from_pretrained(model_id, torch_dtype=torch.float16)
     pipe = pipe.to(DEVICE)
 
     image = pipe(prompt, negative_prompt=neg_prompt).images[0]
