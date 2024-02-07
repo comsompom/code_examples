@@ -1,0 +1,26 @@
+render page
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>GPT answering the questions...</title>
+</head>
+<body>
+<form action="/result" enctype="multipart/form-data" method="POST">
+    <textarea placeholder='Enter your question...' maxlength='2000' minlength='5'
+              name="text" rows="4" cols="100"
+              style="text-align:left; overflow:auto; border:1px outset #070809;">
+        What is the future for the earth
+    </textarea><br>
+    <input type="submit"/>
+</form>
+
+{% if gpt_answer %}
+    <h3>GPT Answer is</h3>
+    <p>{{ gpt_answer }}y</p>
+{% else %}
+    <h3>GPT is waiting the question..</h3>
+{% endif %}
+
+</body>
+</html>
