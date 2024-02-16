@@ -7,7 +7,7 @@ app = Flask(__name__)
 
 def get_response(inp_text: str) -> str:
     response = g4f.ChatCompletion.create(
-        model='gpt-3.5-turbo',
+        model=g4f.models.gpt_4,
         messages=[{'role': 'user', 'content': inp_text}]
     )
     return response
