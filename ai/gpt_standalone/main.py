@@ -21,5 +21,14 @@ def show_result():
     return render_template('result_answer.html', gpt_answer=gpt_answer)
 
 
-if name == "__main__":
+@app.route('/chat', methods=['POST'])
+def simple_chat():
+    user_mes = request.get_json().get("user_chat", "")
+    gpt_answer = get_response(user_mes)
+    return {
+        "gpt_answer": gpt_answer
+    }
+
+
+if __name__ == "__main__":
     app.run(host='0.0.0.0', port=5000, debug=True)
