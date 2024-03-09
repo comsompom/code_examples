@@ -179,6 +179,6 @@ class ImgClassifierProcessor:
 
 
 img_url = "https://thediplomat.com/wp-content/uploads/2016/07/sizes/medium/thediplomat_2016-07-19_16-31-08.jpg"
-image_processor = ImgClassifierProcessor(new_dataset=True, show_logs=True, use_weights=False, model_augment=False)
+image_processor = ImgClassifierProcessor(new_dataset=False, show_logs=True, use_weights=True, model_augment=False)
 prediction = image_processor.model_prediction_process(img_url)
 print(prediction)

@@ -16,7 +16,7 @@ MODEL_EPOCH = 25
 MODEL_OPTIMIZER = 'adam'
 MODEL_LAYER_ACTIVATION = 'relu'
 
-PRETRAINED_WEIGHTS_PATH = "model_bmp_tank.hdf5"
+PRETRAINED_WEIGHTS_PATH = "model_T 72 tank_T 80 tank_T 90 tank.hdf5"
 
 '''
 Lists of the other russian orcks military techick
