@@ -1,5 +1,47 @@
 ## Orc's Tank image classifier
 
+The AI image classifier model design to collect and classify the Russian's orcs Army 
+units for the purpose of correctly destroing them.
+
+The Image model designed with two main components:
+* Dataset downloader
+* Image processor
+
+### Dataset image creator
+
+Automatically download and create the images Label set for model classification.
+in the ``constants`` ``IMAGE_LABEL_LIST`` should be described in the list the labels 
+by which will be created the model. All main lists already created and described in the 
+```constants.py``` file and you could copy and set or add them or change in to the 
+``IMAGE_LABEL_LIST`` constant. 
+
+Also the ```DatasetCreator``` class is possible to use like a standalone application for 
+the image label dataset
+The variable ```TIME_SLEEP_AFTER_EACH_DOWNLOAD``` is set to the time sleep after each 
+image download because some of the search engine does not allow to download a lot of 
+images by once.
+The variable ```EACH_LABEL_COUNT``` has the value of the downloaded images for each 
+label category in the model. For the best practice this value should be at least 1000 
+images in one category, but it could take some time for creating the model with the 
+huge number of the images. After dataset image downloader will be finished and images 
+will be downloaded and created in the separated categories then it is recomended 
+manually check the categories and remove the images that does not fit to the category 
+or duplicated
+
+### Image processor
+
+The image processor create the model, train it, save the weights in to the file 
+```PRETRAINED_WEIGHTS_PATH``` and predict the image from url (from internet or local)
+It is important to use one image height and one image width for the all images in the 
+label set for creating the correctly working model. This values could be set in the 
+valiables: ```IMAGE_WIDTH``` and ``IMAGE_HEIGHT``
+
+The main Image processor variables are set in the variables:
+* ```BATCH_SIZE``` for the send the batches of the images in the train process
+* ```MODEL_EPOCH``` for the number of the train epochs
+* ```MODEL_OPTIMIZER``` for the model optimizer - for tune process it could be differ
+* ```MODEL_LAYER_ACTIVATION``` for the layers activation inside the model
+
 To use the model in the code you need to Initialise it and put some parameters to it:
 
 ```
