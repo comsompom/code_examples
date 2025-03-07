@@ -2,7 +2,7 @@ import requests
 import json
 from constants import WEI
 from utils import CryptoUtils, get_api_key
-from methods import WebThreeMethods
+from methods import WebThreeMethods, MethodBlocks
 from networks import CryptoNetwork
 
 
@@ -11,8 +11,7 @@ class MetamaskOperation:
         self.wallet = wallet
         self.api_key = get_api_key()
         self.headers = {"content-type": "application/json"}
-        # possible blocks vals: latest, earliest, pending, safe, or finalized
-        self.block = "latest"
+        self.block = MethodBlocks().latest
         bnb_url = CryptoNetwork().BNB
         self.url = f"{bnb_url}{self.api_key}"
 
