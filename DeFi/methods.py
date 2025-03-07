@@ -10,3 +10,12 @@ class WebThreeMethods:
     get_transaction_count: str = 'eth_getTransactionCount'
     chan_id: str = 'eth_chainId'
     max_priority_fee_per_gas: str = 'eth_maxPriorityFeePerGas'
+
+
+@dataclass
+class MethodBlocks:
+    latest: str = 'latest'
+    earliest: str = 'earliest'
+    pending: str = 'pending'
+    safe: str = 'safe'
+    finalized: str = 'finalized'
