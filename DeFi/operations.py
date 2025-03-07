@@ -1,8 +1,9 @@
 import requests
 import json
-from constants import WEI, BASE_URL
+from constants import WEI
 from utils import CryptoUtils, get_api_key
 from methods import EtheriumMethods
+from networks import CryptoNetwork
 
 
 class MetamaskOperation:
@@ -12,7 +13,8 @@ class MetamaskOperation:
         self.headers = {"content-type": "application/json"}
         # possible blocks vals: latest, earliest, pending, safe, or finalized
         self.block = "latest"
-        self.url = f"{BASE_URL}{self.api_key}"
+        bnb_url = CryptoNetwork().BNB
+        self.url = f"{bnb_url}{self.api_key}"
 
     def requested_payload(self, operation, *param_args):
         params = [param for param in param_args]
