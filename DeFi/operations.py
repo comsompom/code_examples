@@ -2,7 +2,7 @@ import requests
 import json
 from constants import WEI
 from utils import CryptoUtils, get_api_key
-from methods import EtheriumMethods
+from methods import WebThreeMethods
 from networks import CryptoNetwork
 
 
@@ -38,21 +38,21 @@ class MetamaskOperation:
         return int(response.get('result', 0.0), 16)
 
     def get_balance(self):
-        payload = self.requested_payload(EtheriumMethods().get_balance, self.wallet, self.block)
+        payload = self.requested_payload(WebThreeMethods().get_balance, self.wallet, self.block)
         return self.response_to_usd(self.response_from_request(payload))
 
     def get_gas_price(self):
-        payload = self.requested_payload(EtheriumMethods().gas_price)
+        payload = self.requested_payload(WebThreeMethods().gas_price)
         return self.response_to_usd(self.response_from_request(payload))
 
     def get_transaction_count(self):
-        payload = self.requested_payload(EtheriumMethods().get_transaction_count, self.wallet, self.block)
+        payload = self.requested_payload(WebThreeMethods().get_transaction_count, self.wallet, self.block)
         return self.response_to_num(self.response_from_request(payload))
 
     def chain_id(self):
-        payload = self.requested_payload(EtheriumMethods().chan_id)
+        payload = self.requested_payload(WebThreeMethods().chan_id)
         return self.response_to_num(self.response_from_request(payload))
 
     def max_priority_fee_per_gas(self):
-        payload = self.requested_payload(EtheriumMethods().max_priority_fee_per_gas)
+        payload = self.requested_payload(WebThreeMethods().max_priority_fee_per_gas)
         return self.response_to_num(self.response_from_request(payload))
