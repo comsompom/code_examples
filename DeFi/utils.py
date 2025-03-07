@@ -14,3 +14,9 @@ class CryptoUtils:
         data = requests.get(self.price_url)
         data = data.json()
         return data['price']
+
+
+def get_api_key():
+    with open('mm_api_key', 'r') as api_key_file:
+        api_key = api_key_file.read()
+    return api_key
