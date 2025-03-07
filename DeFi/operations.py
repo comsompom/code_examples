@@ -31,27 +31,28 @@ class MetamaskOperation:
     def response_from_request(self, payload):
         return requests.post(self.url, data=json.dumps(payload), headers=self.headers).json()
 
+    def response_to_usd(self, response):
+        return int(response.get('result', 0.0), 16) * WEI * float(self.etherium_price())
+
+    def response_to_num(self, response):
+        return int(response.get('result', 0.0), 16)
+
     def get_balance(self):
         payload = self.requested_payload(EtheriumMethods().get_balance, self.wallet, self.block)
-        response = self.response_from_request(payload)
-        return int(response.get('result', 0.0), 16) * WEI * float(self.etherium_price())
+        return self.response_to_usd(self.response_from_request(payload))
 
     def get_gas_price(self):
         payload = self.requested_payload(EtheriumMethods().gas_price)
-        response = self.response_from_request(payload)
-        return int(response.get('result', 0.0), 16) * WEI * float(self.etherium_price())
+        return self.response_to_usd(self.response_from_request(payload))
 
     def get_transaction_count(self):
         payload = self.requested_payload(EtheriumMethods().get_transaction_count, self.wallet, self.block)
-        response = self.response_from_request(payload)
-        return int(response.get('result', 0.0), 16)
+        return self.response_to_num(self.response_from_request(payload))
 
     def chain_id(self):
         payload = self.requested_payload(EtheriumMethods().chan_id)
-        response = self.response_from_request(payload)
-        return int(response.get('result', 0.0), 16)
+        return self.response_to_num(self.response_from_request(payload))
 
     def max_priority_fee_per_gas(self):
         payload = self.requested_payload(EtheriumMethods().max_priority_fee_per_gas)
-        response = self.response_from_request(payload)
-        return int(response.get('result', 0.0), 16)
+        return self.response_to_num(self.response_from_request(payload))
