@@ -13,7 +13,7 @@ class CryptoUtils:
     def get_price(self):
         data = requests.get(self.price_url)
         data = data.json()
-        return data['price']
+        return data.get('price', 0.0)
 
 
 def get_api_key():
