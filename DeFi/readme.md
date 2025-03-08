@@ -3,8 +3,8 @@
 ## Table of Contents
 
  1. [Quick Start](#quick-start)
- 2. [Library Description](#lib-descr)
- 3. [API documentation](#api-doc)
+ 2. [Library Description](#library-description)
+ 3. [API documentation](#api-documentation)
 
 Easy to use with your Metamask address. Also you need to create 
 the Metamask developper API_KEY - the instructions how to do 
