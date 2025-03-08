@@ -61,3 +61,11 @@ class MetamaskOperation:
     def max_priority_fee_per_gas(self):
         payload = self._requested_payload(WebThreeMethods().max_priority_fee_per_gas)
         return self._num(payload)
+
+    def accounts(self):
+        payload = self._requested_payload(WebThreeMethods().accounts)
+        return self._response_from_request(payload).get('result', 1)
+
+    def listening(self):
+        payload = self._requested_payload(WebThreeMethods().listen)
+        return self._response_from_request(payload).get('result', 'True')

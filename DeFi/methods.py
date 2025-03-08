@@ -10,6 +10,8 @@ class WebThreeMethods:
     get_transaction_count: str = 'eth_getTransactionCount'
     chan_id: str = 'eth_chainId'
     max_priority_fee_per_gas: str = 'eth_maxPriorityFeePerGas'
+    accounts: str = 'eth_accounts'
+    listen: str = 'net_listening'
 
 
 @dataclass

@@ -17,3 +17,9 @@ print(f"Chain ID: {mm_wallet.chain_id()}")
 
 # Returns an estimate of how much priority fee, in wei, you need to be included in a block.
 print(f"estimate of how much priority fee: {mm_wallet.max_priority_fee_per_gas()}")
+
+# Returns a list of addresses owned by the client.
+print(f"User accounts number: {mm_wallet.accounts()}")
+
+# Returns true if client is actively listening for network connections.
+print(f"Client all time listening the network: {mm_wallet.listening()}")
