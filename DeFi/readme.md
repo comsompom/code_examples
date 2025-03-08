@@ -11,7 +11,8 @@ the Metamask developper API_KEY - the instructions how to do
 this you could find on the WEB3 developper portal (also needs 
 login credentials):
 
-https://developer.metamask.io/
+[Developer Portal](https://developer.metamask.io/)
+
 
 ## Quick Start
 
@@ -38,6 +39,7 @@ print(f"Chain ID: {mm_wallet.chain_id()}")
 # Returns an estimate of how much priority fee, in wei, you need to be included in a block.
 print(f"estimate of how much priority fee: {mm_wallet.max_priority_fee_per_gas()}")
 ```
+
 
 ## Library Description
 
@@ -79,4 +81,4 @@ btc_price = CryptoUtils("BTC").get_price()
 
 ## API documentation
 The main documetation based on which was created the library are here:
-https://docs.metamask.io/services/reference/bnb-smart-chain/json-rpc-methods/eth_estimategas/
+[Metamask API](https://docs.metamask.io/services/reference/bnb-smart-chain/json-rpc-methods/eth_estimategas/)
