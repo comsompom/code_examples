@@ -12,6 +12,7 @@ class WebThreeMethods:
     max_priority_fee_per_gas: str = 'eth_maxPriorityFeePerGas'
     accounts: str = 'eth_accounts'
     listen: str = 'net_listening'
+    peer_nums: str = 'net_peerCount'
 
 
 @dataclass

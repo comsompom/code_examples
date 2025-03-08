@@ -69,3 +69,7 @@ class MetamaskOperation:
     def listening(self):
         payload = self._requested_payload(WebThreeMethods().listen)
         return self._response_from_request(payload).get('result', 'True')
+
+    def peer_nums(self):
+        payload = self._requested_payload(WebThreeMethods().peer_nums)
+        return self._num(payload)

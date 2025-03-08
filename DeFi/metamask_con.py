@@ -23,3 +23,6 @@ print(f"User accounts number: {mm_wallet.accounts()}")
 
 # Returns true if client is actively listening for network connections.
 print(f"Client all time listening the network: {mm_wallet.listening()}")
+
+# Returns the number of peers currently connected to the client.
+print(f"Number of the peers connected to the client: {mm_wallet.peer_nums()}")
