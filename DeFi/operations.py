@@ -12,8 +12,8 @@ class MetamaskOperation:
         self.api_key = get_api_key()
         self.headers = {"content-type": "application/json"}
         self.block = MethodBlocks().latest
-        self.bnb_url = CryptoNetwork().BNB
-        self.url = f"{self.bnb_url}{self.api_key}"
+        self.net_url = CryptoNetwork().BNB
+        self.url = f"{self.net_url}{self.api_key}"
 
     def _requested_payload(self, operation, *param_args):
         params = [param for param in param_args]

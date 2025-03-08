@@ -45,7 +45,21 @@ print(f"estimate of how much priority fee: {mm_wallet.max_priority_fee_per_gas()
 
 The library could connect to different networks that Metamask allowed. The networks 
 described in the **networks.py** in the **CryptoNetwork** and could redefine in the 
-**MetamaskOperation** class parameter **bnb_url**
+**MetamaskOperation** class parameter **net_url**
+
+```python
+from operations import MetamaskOperation
+from networks import CryptoNetwork
+
+
+address = "0x107119102c2EC84099cDce3D5eFDE2dcbf4DEB2a"
+mm_wallet = MetamaskOperation(address)
+# redefine the network to Etherium
+mm_wallet.net_url = CryptoNetwork().ETHERIUM
+# return wallet balance
+print(f"Wallet: {address}, balance is: {mm_wallet.get_balance()}")
+```
+
 
 Some Methods of the **MetamaskOperation** are using the **block** parameter in the 
 payload. This **block** parameter could be redefine using the **MethodBlocks** class 
