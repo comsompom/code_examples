@@ -60,6 +60,10 @@ mm_wallet.net_url = CryptoNetwork().ETHERIUM
 print(f"Wallet: {address}, balance is: {mm_wallet.get_balance()}")
 ```
 
+teh list of the possible using networks:
+
+**BNB, ARBITRUM, BASE, BLAST, CELO, ETHERIUM, LINEA, MANTLE, opBNB, POLYGONPOS**
+
 
 Some Methods of the **MetamaskOperation** are using the **block** parameter in the 
 payload. This **block** parameter could be redefine using the **MethodBlocks** class 
@@ -76,6 +80,11 @@ mm_wallet.block = MethodBlocks().earliest
 # return wallet balance
 print(f"Wallet: {address}, balance is: {mm_wallet.get_balance()}")
 ```
+
+the list of the possible used blocks:
+
+**latest, earliest, pending, safe, finalized**
+
 
 The **utils.py** fail contain the class **CryptoUtils** which could be used separately 
 and independent of the main Metamask library as the class which return the current 
