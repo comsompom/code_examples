@@ -36,22 +36,28 @@ class MetamaskOperation:
     def _response_to_num(self, response):
         return int(response.get('result', 0.0), 16)
 
+    def _usd(self, payload):
+        return self._response_to_usd(self._response_from_request(payload))
+
+    def _num(self, payload):
+        return self._response_to_num(self._response_from_request(payload))
+
     def get_balance(self):
         payload = self._requested_payload(WebThreeMethods().get_balance, self.wallet, self.block)
-        return self._response_to_usd(self._response_from_request(payload))
+        return self._usd(payload)
 
     def get_gas_price(self):
         payload = self._requested_payload(WebThreeMethods().gas_price)
-        return self._response_to_usd(self._response_from_request(payload))
+        return self._usd(payload)
 
     def get_transaction_count(self):
         payload = self._requested_payload(WebThreeMethods().get_transaction_count, self.wallet, self.block)
-        return self._response_to_num(self._response_from_request(payload))
+        return self._num(payload)
 
     def chain_id(self):
         payload = self._requested_payload(WebThreeMethods().chan_id)
-        return self._response_to_num(self._response_from_request(payload))
+        return self._num(payload)
 
     def max_priority_fee_per_gas(self):
         payload = self._requested_payload(WebThreeMethods().max_priority_fee_per_gas)
-        return self._response_to_num(self._response_from_request(payload))
+        return self._num(payload)
