@@ -49,12 +49,32 @@ Some Methods of the **MetamaskOperation** are using the **block** parameter in t
 payload. This **block** parameter could be redefine using the **MethodBlocks** class 
 from the **operations.py** file
 
+```python
+from operations import MetamaskOperation
+from methods import MethodBlocks
+
+
+address = "0x107119102c2EC84099cDce3D5eFDE2dcbf4DEB2a"
+mm_wallet = MetamaskOperation(address)
+mm_wallet.block = MethodBlocks().earliest
+# return wallet balance
+print(f"Wallet: {address}, balance is: {mm_wallet.get_balance()}")
+```
+
 The **utils.py** fail contain the class **CryptoUtils** which could be used separately 
 and independent of the main Metamask library as the class which return the current 
 crypto rate from the market. The Symbols name should be in the **CryptoUtils** 
 initialisation. The symbol nameshould be in the capital letters. The right symbol 
 names could be checked on the Binance online market platform. The return of the 
 current crypto symbol in the USDT value.
+
+```python
+from utils import CryptoUtils
+
+
+# get the current BTCUSDT rate from the market
+btc_price = CryptoUtils("BTC").get_price()
+```
 
 
 ## API documentation
