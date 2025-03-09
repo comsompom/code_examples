@@ -1,16 +1,16 @@
 from operations import MetamaskOperation
 
 
-address = "0x107119102c2EC84099cDce3D5eFDE2dcbf4DEB2a"
-mm_wallet = MetamaskOperation(address)
+ADDRESS = "0x107119102c2EC84099cDce3D5eFDE2dcbf4DEB2a"
+mm_wallet = MetamaskOperation(ADDRESS)
 # return wallet balance
-print(f"Wallet: {address}, balance is: {mm_wallet.get_balance()}")
+print(f"Wallet: {ADDRESS}, balance is: {mm_wallet.get_balance()}")
 
 # return current gas for transaction
 print(f"Current gas fee for transaction: {mm_wallet.get_gas_price()}")
 
 # return wallet transaction count
-print(f"Wallet: {address}, number transactions: {mm_wallet.get_transaction_count()}")
+print(f"Wallet: {ADDRESS}, number transactions: {mm_wallet.get_transaction_count()}")
 
 # return chain id
 print(f"Chain ID: {mm_wallet.chain_id()}")
