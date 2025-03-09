@@ -1,3 +1,4 @@
+# pylint: disable=E0401
 """Example of the telegram bot"""
 
 import telebot
