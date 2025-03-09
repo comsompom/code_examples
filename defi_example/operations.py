@@ -1,7 +1,7 @@
 # pylint: disable=E0401
 """The main module with the class MetamaskOperation to make the possible operations"""
-import requests
 import json
+import requests
 from constants import WEI
 from utils import CryptoUtils, get_api_key
 from methods import WebThreeMethods, MethodBlocks
