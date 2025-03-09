@@ -1,4 +1,5 @@
 # pylint: disable=E0401
+# pylint: disable=R0902
 """
 Dataclasses for:
  WebThreeMethods which describe the methods fo the Metamask
@@ -10,6 +11,7 @@ from dataclasses import dataclass
 
 @dataclass
 class WebThreeMethods:
+    """Dataclass for describe the possible metamask methods"""
     get_balance: str = 'eth_getBalance'
     gas_price: str = 'eth_gasPrice'
     send_transaction: str = 'eth_sendTransaction'
@@ -24,6 +26,7 @@ class WebThreeMethods:
 
 @dataclass
 class MethodBlocks:
+    """Dataclass for describing the blocks of the parameters"""
     latest: str = 'latest'
     earliest: str = 'earliest'
     pending: str = 'pending'
