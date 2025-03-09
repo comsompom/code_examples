@@ -1,3 +1,5 @@
+"""Example of the telegram bot"""
+
 import telebot
 import g4f
 from transformers import T5Tokenizer, T5ForConditionalGeneration
@@ -6,9 +8,10 @@ from bs4 import BeautifulSoup
 
 
 BOT_KEY = "API_TOKEN"
-HELP_TEXT_MSG = '''This Bot is using the Artificial Intelegence techonology and could summarize any URL or 
-send and answer for any your question. For summarizing of the URL at the beginning of the message type
-"URL:" or "url:" or start your url from "http://" or "https://".
+HELP_TEXT_MSG = '''
+This Bot is using the Artificial Intelegence techonology and could summarize any URL or 
+send and answer for any your question. For summarizing of the URL at the beginning of 
+the message type "URL:" or "url:" or start your url from "http://" or "https://".
 For getting the answer to any of your question just send the text of your question.
 '''
 
