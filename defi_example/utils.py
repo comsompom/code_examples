@@ -1,4 +1,6 @@
 # pylint: disable=E0401
+"""Contain the class CryptoUtils for getting the current crypto market rate
+and the function get_api_key to get the API Key from the local folder file"""
 import requests
 
 

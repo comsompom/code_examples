@@ -1,4 +1,6 @@
 # pylint: disable=C0103
+# pylint: disable=R0902
+"""Contains the neccesary components for describing the networks"""
 from dataclasses import dataclass
 
 
