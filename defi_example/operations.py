@@ -1,3 +1,4 @@
+# pylint: disable=E0401
 import requests
 import json
 from constants import WEI

@@ -1,3 +1,4 @@
+# pylint: disable=E0401
 import requests
 
 
@@ -11,12 +12,14 @@ class CryptoUtils:
         self.price_url = f'https://api.binance.com/api/v3/ticker/price?symbol={symbol}USDT'
 
     def get_price(self):
+        """Method return the current crypto price from market"""
         data = requests.get(self.price_url)
         data = data.json()
         return data.get('price', 0.0)
 
 
 def get_api_key():
+    """Method gets the API key from local folder file"""
     with open('mm_api_key', 'r') as api_key_file:
         api_key = api_key_file.read()
     return api_key

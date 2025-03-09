@@ -1,8 +1,10 @@
+# pylint: disable=C0103
 from dataclasses import dataclass
 
 
 @dataclass
 class CryptoNetwork:
+    """Dataclas for describing the possible Metamask networks"""
     BNB: str = 'https://bsc-mainnet.infura.io/v3/'
     ARBITRUM: str = 'https://arbitrum-mainnet.infura.io/v3/'
     BASE: str = 'https://base-sepolia.infura.io/v3/'
