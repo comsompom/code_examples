@@ -20,6 +20,7 @@ bot = telebot.TeleBot(BOT_KEY)
 
 
 def get_responce_from_ai(msg):
+    """Method gets the response from GPT AI"""
     responce = g4f.ChatCompletion.create(
         model='gpt-3.5-turbo',
         messages=[{'role': 'user', 'content': msg}],
@@ -28,6 +29,7 @@ def get_responce_from_ai(msg):
 
 
 def extract_text_from_url(url: str) -> str:
+    """Method makes extraction text from the message"""
     page = requests.get(url)
     soup = BeautifulSoup(page.content, "html.parser")
     paragraphs = soup.find_all("p")
@@ -36,23 +38,31 @@ def extract_text_from_url(url: str) -> str:
 
 
 def summerize_text(input_text: str) -> str:
+    """Method makes the AI text summarisation"""
     model_name = "t5-small"
     tokenizer = T5Tokenizer.from_pretrained(model_name)
     model = T5ForConditionalGeneration.from_pretrained(model_name)
-    inputs = tokenizer.encode("summarize: " + input_text, return_tensors="pt", max_length=1024, truncation=True)
-    summary_ids = model.generate(inputs, max_length=150, min_length=50, length_penalty=2.0, num_beams=4,
+    inputs = tokenizer.encode("summarize: " + input_text,
+                              return_tensors="pt",
+                              max_length=1024,
+                              truncation=True)
+    summary_ids = model.generate(inputs, max_length=150,
+                                 min_length=50,
+                                 length_penalty=2.0,
+                                 num_beams=4,
                                  early_stopping=True)
     summary = tokenizer.decode(summary_ids[0], skip_special_tokens=True)
     return summary
 
 @bot.message_handler(commands=['help'])
 def start_message(message):
+    """Method send the message from the bot"""
     bot.send_message(message.from_user.id, HELP_TEXT_MSG)
 
 @bot.message_handler(func=lambda message: True)
 def responce_text_message(message):
+    """Method return the response from message"""
     rec_text = message.text
-    bot_massage = "Hi From AI..."
     if rec_text[:4] in ("URL:", "url:"):
         input_text = extract_text_from_url(rec_text[4:])
         bot_massage = summerize_text(input_text)
