@@ -1,3 +1,10 @@
+# pylint: disable=E0401
+"""
+Dataclasses for:
+ WebThreeMethods which describe the methods fo the Metamask
+ and MethodBlocks for describe the blocks of the parameters
+"""
+
 from dataclasses import dataclass
 
 

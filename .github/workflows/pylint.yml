@@ -21,3 +21,4 @@ jobs:
     - name: Analysing the code with pylint
       run: |
         pylint $(git ls-files 'bots/telegram_bots/*.py')
+        pylint $(git ls-files 'defi_example/*.py')

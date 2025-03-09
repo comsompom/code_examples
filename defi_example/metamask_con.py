@@ -1,3 +1,6 @@
+# pylint: disable=E0401
+"""Example of using the Metamask Library"""
+
 from operations import MetamaskOperation
 
 
