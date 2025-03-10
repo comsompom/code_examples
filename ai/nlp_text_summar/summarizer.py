@@ -1,4 +1,5 @@
 # pylint: disable=E0401
+# pylint: disable=C0303
 """The methods for extract text from web and make summarisation"""
 from transformers import T5Tokenizer, T5ForConditionalGeneration
 import requests
