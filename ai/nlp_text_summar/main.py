@@ -1,15 +1,18 @@
+# pylint: disable=E0401
+"""Example of the Flask application using the NLP summariser"""
 from flask import Flask, request, render_template
 from summarizer import extract_text_from_url, summerize_text
 
 
 app = Flask(__name__)
-url = "https://en.wikipedia.org/wiki/Natural_language_processing"
+URL = "https://en.wikipedia.org/wiki/Natural_language_processing"
 
 
 @app.route('/result', methods=['GET', 'POST'])
 def show_result():
+    """The route for getting the results. Possible to use with GET and POST"""
     inp_text = ""
-    input_text = extract_text_from_url(url)
+    input_text = extract_text_from_url(URL)
     if request.method == 'POST':
         inp_text = request.form['text']
     if inp_text:
