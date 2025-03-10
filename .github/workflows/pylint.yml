@@ -22,3 +22,4 @@ jobs:
       run: |
         pylint $(git ls-files 'bots/telegram_bots/*.py')
         pylint $(git ls-files 'defi_example/*.py')
+        pylint $(git ls-files 'simple_fast_api_array/*.py')
