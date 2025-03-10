@@ -1,3 +1,5 @@
+![linting](https://github.com/comsompom/code_examples/actions/workflows/main.yml/badge.svg)
+
 # Standalone NLP Transformer application
 
 System is working with transformers library and working with Flask python framework.
