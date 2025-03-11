@@ -1,4 +1,6 @@
 # pylint: disable=E0401
+# pylint: disable=C0103
+# pylint: disable=W0621
 """Create the generated image from the text prompt"""
 from transformers import T5Tokenizer, T5ForConditionalGeneration
 import requests
