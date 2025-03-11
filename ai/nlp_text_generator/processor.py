@@ -5,6 +5,7 @@
 # pylint: disable=C0103
 # pylint: disable=R0904
 # pylint: disable=W0201
+# pylint: disable=W1514
 """The main module for text generation"""
 import requests
 import os
@@ -238,7 +239,7 @@ class NLPWordPProcessor:
     def generate_words_text(self, seed_text, number_lines):
         """generate the test the main method"""
         if self.model_trained:
-            for i in range(number_lines):
+            for _ in range(number_lines):
                 text_word_list = []
                 for _ in range(MODEL_LENGTH_GENERATE):
                     encoded = self.token.texts_to_sequences([seed_text])
