@@ -6,9 +6,10 @@
 # pylint: disable=R0904
 # pylint: disable=W0201
 # pylint: disable=W1514
+# pylint: disable=W0621
 """The main module for text generation"""
-import requests
 import os
+import requests
 import numpy as np
 from bs4 import BeautifulSoup
 
@@ -253,7 +254,7 @@ class NLPWordPProcessor:
                             predicted_word = word
                             break
 
-                    seed_text = seed_text + ' ' + predicted_word
+                    seed_text += ' ' + predicted_word
                     text_word_list.append(predicted_word)
 
                 seed_text = text_word_list[-1]
