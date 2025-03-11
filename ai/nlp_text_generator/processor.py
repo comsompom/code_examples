@@ -4,6 +4,7 @@
 # pylint: disable=R0917
 # pylint: disable=C0103
 # pylint: disable=R0904
+# pylint: disable=W0201
 """The main module for text generation"""
 import requests
 import os
@@ -130,7 +131,7 @@ class NLPWordPProcessor:
     def text_data_cleaner(self):
         """clean the source text from special chars and unused symbols"""
         data_cleaned = []
-        for idx, line in enumerate(self.data):
+        for line in self.data:
             if len(line) > 1:
                 counter = 0
                 for element in self.exclude_phrase_list:
