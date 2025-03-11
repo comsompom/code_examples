@@ -11,13 +11,14 @@ from tensorflow.keras.models import Sequential
 from tensorflow.keras.layers import Dense, LSTM, Embedding
 from tensorflow.keras.preprocessing.sequence import pad_sequences
 
-from constants import (SOURCE_LINK, SOURCE_PATH, NUMERIC_TEXT, MODEL_OPTIMIZER, MODEL_USE_LOSS,
-                       UNICODE_TO_ENG_DICT, MODEL_PATH, MODEL_EPOCH, MODEL_BATCH_SIZE, LSTM_LENGTH,
-                       MODEL_LENGTH_GENERATE, SOURCE_LINKS_LIST, PUNCTUATION_SYMBOLS, EXCLUDE_PHRASE_LIST)
+from constants import (SOURCE_LINK, SOURCE_PATH, NUMERIC_TEXT, MODEL_OPTIMIZER,
+                       MODEL_USE_LOSS, UNICODE_TO_ENG_DICT, MODEL_PATH, MODEL_EPOCH,
+                       MODEL_BATCH_SIZE, LSTM_LENGTH, MODEL_LENGTH_GENERATE,
+                       SOURCE_LINKS_LIST, PUNCTUATION_SYMBOLS, EXCLUDE_PHRASE_LIST)
 
 
 class NLPWordPProcessor:
-
+    """NLP Processor for text generation"""
     def __init__(self, model_name: str, unicode=True, source_format='html',
                  use_punctuation=False, multilink=False, text_clean=False):
         self.model_name = model_name
@@ -46,11 +47,13 @@ class NLPWordPProcessor:
         self.model_trained = False
 
     def unicode_text_to_eng_symbols_encoder(self):
+        """convert unicode symbols to english letters"""
         self.text = self.text.translate(str.maketrans("", "", self.num_text))
         for key, val in self.unicode_to_eng.items():
             self.text = self.text.replace(key, val)
 
     def source_base_text_from_url(self, link) -> None:
+        """method for getting the text from provided url"""
         page = requests.get(link)
         soup = BeautifulSoup(page.content, "html.parser")
         paragraphs = soup.find_all("p")
@@ -64,10 +67,12 @@ class NLPWordPProcessor:
             self.unicode_text_to_eng_symbols_encoder()
 
     def html_source_multi_link(self):
+        """method for getting text from url lists"""
         for link in SOURCE_LINKS_LIST:
             self.source_base_text_from_url(link)
 
     def source_base_text_from_text_url(self, link):
+        """crea te the text data from text url"""
         text = requests.get(link).text
         self.text += " "
         self.text += text
@@ -77,10 +82,12 @@ class NLPWordPProcessor:
             self.unicode_text_to_eng_symbols_encoder()
 
     def txt_source_multi_link(self):
+        """utils method for getting multi text url"""
         for link in SOURCE_LINKS_LIST:
             self.source_base_text_from_text_url(link)
 
     def source_base_text_load(self):
+        """methos check which source will be used html or txt"""
         if self.source_format == 'html':
             if not self.multi_link:
                 self.source_base_text_from_url(self.source_link)
@@ -93,25 +100,30 @@ class NLPWordPProcessor:
                 self.txt_source_multi_link()
 
     def create_dir_if_not_exist(self, dir_name):
+        """helped method for creating the folder if it is not exist"""
         if not os.path.isdir(dir_name):
             os.mkdir(dir_name)
 
     def remove_previous_exist_file(self):
+        """utils method for removing file if it is exist"""
         self.create_dir_if_not_exist(self.source_data_dir)
         if os.path.exists(self.source_text_path):
             os.remove(self.source_text_path)
 
     def save_base_source_text_to_file(self):
+        """save the source text to the file"""
         self.remove_previous_exist_file()
         if len(self.text) > 0:
             with open(self.source_text_path, 'a') as source_text_file:
                 source_text_file.write(self.text)
 
     def load_source_text_to_data(self):
+        """create the class data object with source text from file"""
         with open(self.source_text_path, 'r') as source_text_file:
             self.data = source_text_file.read().splitlines()
 
     def text_data_cleaner(self):
+        """clean the source text from special chars and unused symbols"""
         data_cleaned = []
         for idx, line in enumerate(self.data):
             if len(line) > 1:
@@ -128,6 +140,7 @@ class NLPWordPProcessor:
             source_text_file.writelines(data_cleaned)
 
     def prepare_data_from_source_text(self):
+        """prepare the data object from source text"""
         self.source_base_text_load()
         self.save_base_source_text_to_file()
         self.load_source_text_to_data()
@@ -135,12 +148,14 @@ class NLPWordPProcessor:
             self.text_data_cleaner()
 
     def tokenize_data(self):
+        """make tokenization of the data object"""
         self.token = Tokenizer()
         self.token.fit_on_texts(self.data)
         self.encoded_text = self.token.texts_to_sequences(self.data)
         self.vocab_size = len(self.token.word_counts) + 1
 
     def build_sequences(self):
+        """nlp method for build sequences"""
         datalist = []
         for d in self.encoded_text:
             if len(d) > 1:
@@ -158,6 +173,7 @@ class NLPWordPProcessor:
         self.seq_length = self.X.shape[1]
 
     def build_nlp_model(self):
+        """nlp method for building the model"""
         self.model = Sequential()
         self.model.add(Embedding(self.vocab_size, 50, input_length=self.seq_length))
         self.model.add(LSTM(self.lstm_length, return_sequences=True))
@@ -167,21 +183,25 @@ class NLPWordPProcessor:
         self.model_builded = True
 
     def check_model_summary(self):
+        """report model summary when it is builded successful"""
         if self.model_builded:
             self.model.summary()
 
     def compile_and_train_model(self):
+        """compilation and train the model"""
         if self.model_builded:
             self.model.compile(loss=MODEL_USE_LOSS, optimizer=MODEL_OPTIMIZER, metrics=['accuracy'])
             self.model.fit(self.X, self.y, batch_size=MODEL_BATCH_SIZE, epochs=MODEL_EPOCH)
             self.model_trained = True
 
     def save_model_weights_to_file(self):
+        """save the weights of the prediction from current model"""
         self.create_dir_if_not_exist(self.result_model_dir)
         if self.model_trained:
             self.model.save(self.model_weights_path)
 
     def model_from_scratch(self, show_summary=False):
+        """create the model from the scratch without using weights"""
         # use this method for empty source text file and empty model
         self.prepare_data_from_source_text()
         self.tokenize_data()
@@ -193,11 +213,13 @@ class NLPWordPProcessor:
         self.save_model_weights_to_file()
 
     def load_weights_to_model(self):
+        """load the saved weights to the model to work with the weights"""
         if self.model_builded:
             self.model.load_weights(self.model_weights_path)
             self.model_trained = True
 
     def model_from_weights(self, show_summary=False):
+        """retrain the model with the saved weights"""
         # use this method for already calculated weights
         self.load_source_text_to_data()
         self.tokenize_data()
@@ -208,6 +230,7 @@ class NLPWordPProcessor:
         self.load_weights_to_model()
 
     def generate_words_text(self, seed_text, number_lines):
+        """generate the test the main method"""
         if self.model_trained:
             for i in range(number_lines):
                 text_word_list = []
