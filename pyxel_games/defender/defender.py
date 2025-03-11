@@ -154,6 +154,7 @@ class Enemy:
     def draw(self, g=1):
         pyxel.blt(self.en_x, self.en_y, 0, 16 + 8 * g, 0, 8, 8)
 
+
 class Background:
     def __init__(self):
         self.menu_line_y = PLAYER_HEIGHT + MAIN_GAME_FRAME - 2
