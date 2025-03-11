@@ -1,5 +1,6 @@
-import pyxel
+"""Simple pyxel game for defend the Belarus or Ukranian flag"""
 import random
+import pyxel
 
 MAIN_TITLE = 'Smert Voragam! Zyve Belarus! Slava Ukraine!'
 MAIN_WIDTH = 220
