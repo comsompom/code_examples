@@ -1,3 +1,5 @@
+# pylint: disable=E0401
+"""The main module for text generation"""
 import requests
 import os
 import numpy as np
