@@ -20,7 +20,7 @@ Return the result as an array:
 [number of rows, number of columns]
 The result format is in the following example.
 '''
-def getDataframeSize(players: pd.DataFrame) -> List[int]:
+def get_data_frame_size(players: pd.DataFrame) -> List[int]:
     return list(players.shape)
 
 # 2877. Create a DataFrame from List
@@ -29,7 +29,7 @@ Write a solution to create a DataFrame from a 2D list called student_data. This 
 The DataFrame should have two columns, student_id and age, and be in the same order as the original 2D list.
 The result format is in the following example.
 '''
-def createDataframe(student_data: List[List[int]]) -> pd.DataFrame:
+def create_data_frame(student_data: List[List[int]]) -> pd.DataFrame:
     return pd.DataFrame(student_data, columns=['student_id', 'age'])
 
 # 2880. Select Data
@@ -37,7 +37,7 @@ def createDataframe(student_data: List[List[int]]) -> pd.DataFrame:
 Write a solution to select the name and age of the student with student_id = 101.
 The result format is in the following example.
 '''
-def selectData(students: pd.DataFrame) -> pd.DataFrame:
+def select_data(students: pd.DataFrame) -> pd.DataFrame:
     student_condition = students.loc[students["student_id"]==101]
     return student_condition[['name', 'age']]
 
@@ -47,7 +47,7 @@ A company plans to provide its employees with a bonus.
 Write a solution to create a new column name bonus that contains the doubled values of the salary column.
 The result format is in the following example.
 '''
-def createBonusColumn(employees: pd.DataFrame) -> pd.DataFrame:
+def create_bonus_column(employees: pd.DataFrame) -> pd.DataFrame:
     employees['bonus'] = (employees['salary'] * 2)
     return employees
 
@@ -56,7 +56,7 @@ def createBonusColumn(employees: pd.DataFrame) -> pd.DataFrame:
 There are some duplicate rows in the DataFrame based on the email column.
 Write a solution to remove these duplicate rows and keep only the first occurrence.
 '''
-def dropDuplicateEmails(customers: pd.DataFrame) -> pd.DataFrame:
+def drop_duplicated_emails(customers: pd.DataFrame) -> pd.DataFrame:
     return customers.drop_duplicates(subset=['email'])
 
 # 2883. Drop Missing Data
@@ -64,5 +64,5 @@ def dropDuplicateEmails(customers: pd.DataFrame) -> pd.DataFrame:
 There are some rows having missing values in the name column.
 Write a solution to remove the rows with missing values.
 '''
-def dropMissingData(students: pd.DataFrame) -> pd.DataFrame:
+def drop_missing_data(students: pd.DataFrame) -> pd.DataFrame:
     return students.dropna(subset=['name'])
