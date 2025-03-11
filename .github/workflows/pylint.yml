@@ -25,3 +25,4 @@ jobs:
         pylint $(git ls-files 'simple_fast_api_array/*.py')
         pylint $(git ls-files 'ai/nlp_text_summar/*.py')
         pylint $(git ls-files 'ai/nlp_text_generator/*.py')
+        pylint $(git ls-files 'ai/image_from_text/*.py')
