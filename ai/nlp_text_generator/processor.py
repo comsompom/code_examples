@@ -1,4 +1,9 @@
 # pylint: disable=E0401
+# pylint: disable=R0902
+# pylint: disable=R0913
+# pylint: disable=R0917
+# pylint: disable=C0103
+# pylint: disable=R0904
 """The main module for text generation"""
 import requests
 import os
