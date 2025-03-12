@@ -23,5 +23,4 @@ with open('hf_token', 'r') as token_file:
     hf_token = token_file.read()
 
 login(token=hf_token)
-print(f"estimate of how much priority fee: {mm_wallet.max_priority_fee_per_gas()}")
 ```
