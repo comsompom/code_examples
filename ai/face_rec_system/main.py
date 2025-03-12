@@ -1,3 +1,5 @@
+# pylint: disable=E0401
+"""Simple Flask application for face recognition"""
 from flask import Flask, request, render_template
 from werkzeug.utils import secure_filename
 from PIL import Image, ImageDraw
@@ -12,6 +14,7 @@ app.config['UPLOAD'] = upload_folder
 
 @app.route('/result', methods=['GET'])
 def show_result():
+    """Flask app route for show the results of the recognition"""
     person_filename = secure_filename('person.png')
     group_filename = secure_filename('find_in_group.JPG')
 
@@ -38,6 +41,7 @@ def show_result():
 
 @app.route('/person', methods=['GET', 'POST'])
 def upload_file():
+    """Flask route to upload the image to server application"""
     if request.method == 'POST':
         file = request.files['img']
         filename = secure_filename(file.filename)
@@ -49,11 +53,13 @@ def upload_file():
 
 @app.route('/search_files')
 def search_files():
+    """route for search the files on the server"""
     return render_template("search_images.html")
 
 
 @app.route('/upload', methods=['POST'])
 def upload():
+    """Flask POST method route to upload the files"""
     if request.method == 'POST':
         files = request.files.getlist('file')
         for file in files:
