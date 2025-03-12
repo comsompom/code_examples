@@ -1,5 +1,6 @@
 # pylint: disable=E0401
 # pylint: disable=R0914
+# pylint: disable=C0303
 """Simple Flask application for face recognition"""
 import os
 from flask import Flask, request, render_template
@@ -19,14 +20,14 @@ def show_result():
     person_filename = secure_filename('person.png')
     group_filename = secure_filename('find_in_group.JPG')
 
-    person_image = face_recognition.load_image_file(os.path.join(app.config['UPLOAD'], 
+    person_image = face_recognition.load_image_file(os.path.join(app.config['UPLOAD'],
                                                                  person_filename))
-    group_persons = face_recognition.load_image_file(os.path.join(app.config['UPLOAD'], 
+    group_persons = face_recognition.load_image_file(os.path.join(app.config['UPLOAD'],
                                                                   group_filename))
 
     person_encodings = face_recognition.face_encodings(person_image)
     face_loc_list = face_recognition.face_locations(group_persons, model='hog')
-    all_face_found_encodings = face_recognition.face_encodings(group_persons, 
+    all_face_found_encodings = face_recognition.face_encodings(group_persons,
                                                                face_loc_list)
 
     pil_image = Image.fromarray(group_persons)
@@ -40,8 +41,8 @@ def show_result():
             draw_obj.rectangle([left, top, right, bottom], outline='red', width=5)
             pil_image.save(os.path.join(app.config['UPLOAD'], group_filename))
 
-    return render_template('person_image.html', 
-                           img=os.path.join(app.config['UPLOAD'], 
+    return render_template('person_image.html',
+                           img=os.path.join(app.config['UPLOAD'],
                                             group_filename))
 
 
@@ -74,6 +75,9 @@ def upload():
         return {
             'files': os.listdir('static/upload')
         }
+    return {
+        'Error': 'Request should be done in the POST operation'
+    }
 
 
 if __name__ == "__main__":
