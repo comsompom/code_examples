@@ -1,10 +1,11 @@
 # pylint: disable=E0401
+# pylint: disable=R0914
 """Simple Flask application for face recognition"""
+import os
 from flask import Flask, request, render_template
 from werkzeug.utils import secure_filename
 from PIL import Image, ImageDraw
 import face_recognition
-import os
 
 
 app = Flask(__name__)
@@ -18,12 +19,15 @@ def show_result():
     person_filename = secure_filename('person.png')
     group_filename = secure_filename('find_in_group.JPG')
 
-    person_image = face_recognition.load_image_file(os.path.join(app.config['UPLOAD'], person_filename))
-    group_persons = face_recognition.load_image_file(os.path.join(app.config['UPLOAD'], group_filename))
+    person_image = face_recognition.load_image_file(os.path.join(app.config['UPLOAD'], 
+                                                                 person_filename))
+    group_persons = face_recognition.load_image_file(os.path.join(app.config['UPLOAD'], 
+                                                                  group_filename))
 
     person_encodings = face_recognition.face_encodings(person_image)
     face_loc_list = face_recognition.face_locations(group_persons, model='hog')
-    all_face_found_encodings = face_recognition.face_encodings(group_persons, face_loc_list)
+    all_face_found_encodings = face_recognition.face_encodings(group_persons, 
+                                                               face_loc_list)
 
     pil_image = Image.fromarray(group_persons)
     draw_obj = ImageDraw.Draw(pil_image)
@@ -36,7 +40,9 @@ def show_result():
             draw_obj.rectangle([left, top, right, bottom], outline='red', width=5)
             pil_image.save(os.path.join(app.config['UPLOAD'], group_filename))
 
-    return render_template('person_image.html', img=os.path.join(app.config['UPLOAD'], group_filename))
+    return render_template('person_image.html', 
+                           img=os.path.join(app.config['UPLOAD'], 
+                                            group_filename))
 
 
 @app.route('/person', methods=['GET', 'POST'])
