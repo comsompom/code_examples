@@ -1,4 +1,10 @@
-"""Example of using the Gemma multimodal model with image recognition"""
+# pylint: disable=E0401
+# pylint: disable=W1514
+"""
+Example of using the Gemma multimodal model with image recognition
+the source of the model here:
+https://huggingface.co/blog/gemma3
+"""
 import torch
 from transformers import AutoProcessor, Gemma3ForConditionalGeneration
 from huggingface_hub import login
@@ -10,11 +16,11 @@ with open('hf_token', 'r') as token_file:
 login(token=hf_token)
 
 
-ckpt = "google/gemma-3-4b-it"
+CKPT = "google/gemma-3-4b-it"
 model = Gemma3ForConditionalGeneration.from_pretrained(
-    ckpt, device_map="auto", torch_dtype=torch.bfloat16,
+    CKPT, device_map="auto", torch_dtype=torch.bfloat16,
 )
-processor = AutoProcessor.from_pretrained(ckpt)
+processor = AutoProcessor.from_pretrained(CKPT)
 
 messages = [
     {
@@ -37,9 +43,3 @@ generation = generation[0][input_len:]
 
 decoded = processor.decode(generation, skip_special_tokens=True)
 print(decoded)
-
-
-"""
-the source of the model here:
-https://huggingface.co/blog/gemma3
-"""
