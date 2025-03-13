@@ -1,4 +1,5 @@
 # pylint: disable=E0401
+# pylint: disable=W1514
 """Simple login code to hugging face hub"""
 from huggingface_hub import login
 
