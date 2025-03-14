@@ -1,4 +1,7 @@
 # pylint: disable=E0401
+# pylint: disable=R0912
+# pylint: disable=R0915
+# pylint: disable=R0903
 """The dataset creator. Finds and download the images to the labels folder"""
 import os
 from PIL import Image
