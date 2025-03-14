@@ -2,6 +2,8 @@
 # pylint: disable=W0718
 # pylint: disable=R0914
 # pylint: disable=R1732
+# pylint: disable=R1722
+# pylint: disable=R1710
 """Dowloader module for download images"""
 import os
 import time
