@@ -1,5 +1,6 @@
 # pylint: disable=E0401
 # pylint: disable=R0902
+# pylint: disable=R0903
 """Simple pyxel game for defend the Belarus or Ukranian flag"""
 import random
 import pyxel
@@ -96,7 +97,8 @@ class Player:
             self.pl_x += self.pl_speed
         if pyxel.btn(pyxel.KEY_LEFT) and self.pl_x >= 2:
             self.pl_x -= self.pl_speed
-        if pyxel.btn(pyxel.KEY_UP) and self.pl_y >= MAIN_GAME_FRAME + self.pl_height + self.pl_speed:
+        if pyxel.btn(pyxel.KEY_UP) and self.pl_y >= MAIN_GAME_FRAME + \
+                self.pl_height + self.pl_speed:
             self.pl_y -= self.pl_speed
         if pyxel.btn(pyxel.KEY_DOWN) and self.pl_y <= MAIN_HEIGHT - 16:
             self.pl_y += self.pl_speed
@@ -180,6 +182,7 @@ class Background:
         self.enemy_score = self.bullets_tab + len(MENU_TEXT_ENEMY) * 8
 
     def draw(self):
+        """draw the backgrount screen"""
         pyxel.line(0, self.menu_line_y, MAIN_WIDTH, self.menu_line_y, 10)
         pyxel.line(self.level_end_tab, self.menu_line_y, self.level_end_tab, 0, 10)
         pyxel.line(self.bullets_tab, self.menu_line_y, self.bullets_tab, 0, 10)
@@ -241,7 +244,7 @@ class Defender:
         """update the status fo the players bullets"""
         for idx, bullet in enumerate(bullets):
             bullet.update()
-            if bullet.is_alive == False:
+            if bullet.is_alive is False:
                 del bullets[idx]
 
     def draw_bullets(self):
