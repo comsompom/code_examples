@@ -21,7 +21,10 @@ class Downloader:
         while i < len(keyword_to_search):
             url = 'https://www.google.com/search?q=' + quote(
                 keyword_to_search[i].encode(
-                    'utf-8')) + '&biw=1536&bih=674&tbm=isch&sxsrf=ACYBGNSXXpS6YmAKUiLKKBs6xWb4uUY5gA:1581168823770&source=lnms&sa=X&ved=0ahUKEwioj8jwiMLnAhW9AhAIHbXTBMMQ_AUI3QUoAQ'
+                    'utf-8')) + '&biw=1536&bih=674&tbm=isch&sxsrf=' \
+                                'ACYBGNSXXpS6YmAKUiLKKBs6xWb4uUY5gA:' \
+                                '1581168823770&source=lnms&sa=X&ved=' \
+                                '0ahUKEwioj8jwiMLnAhW9AhAIHbXTBMMQ_AUI3QUoAQ'
             raw_html = self._download_page(url)
             end_object = -1
             j = 0
@@ -33,11 +36,15 @@ class Downloader:
 
                         buffer = raw_html.find('\\', new_line + 1, end_object)
                         if buffer != -1:
-                            object_raw = (raw_html[new_line + 1:buffer])
+                            object_raw = raw_html[new_line + 1:buffer]
                         else:
-                            object_raw = (raw_html[new_line + 1:end_object])
+                            object_raw = raw_html[new_line + 1:end_object]
 
-                        if '.jpg' in object_raw or 'png' in object_raw or '.ico' in object_raw or '.gif' in object_raw or '.jpeg' in object_raw:
+                        if '.jpg' in object_raw \
+                                or 'png' in object_raw \
+                                or '.ico' in object_raw \
+                                or '.gif' in object_raw \
+                                or '.jpeg' in object_raw:
                             break
                     except Exception as e:
                         print(e)
@@ -57,7 +64,12 @@ class Downloader:
         while i < len(keyword_to_search):
             self._create_directories(main_directory, keyword_to_search[i])
             url = 'https://www.google.com/search?q=' + quote(
-                keyword_to_search[i].encode('utf-8')) + '&biw=1536&bih=674&tbm=isch&sxsrf=ACYBGNSXXpS6YmAKUiLKKBs6xWb4uUY5gA:1581168823770&source=lnms&sa=X&ved=0ahUKEwioj8jwiMLnAhW9AhAIHbXTBMMQ_AUI3QUoAQ'
+                keyword_to_search[i].encode('utf-8')) + '&biw=1536&bih=674&tbm' \
+                                                        '=isch&sxsrf=ACYBGNSXXpS6' \
+                                                        'YmAKUiLKKBs6xWb4uUY5gA:1581' \
+                                                        '168823770&source=lnms&sa=' \
+                                                        'X&ved=0ahUKEwioj8jwiMLnAh' \
+                                                        'W9AhAIHbXTBMMQ_AUI3QUoAQ'
             raw_html = self._download_page(url)
             end_object = -1
             j = 0
@@ -69,11 +81,15 @@ class Downloader:
 
                         buffer = raw_html.find('\\', new_line + 1, end_object)
                         if buffer != -1:
-                            object_raw = (raw_html[new_line+1:buffer])
+                            object_raw = raw_html[new_line+1:buffer]
                         else:
-                            object_raw = (raw_html[new_line+1:end_object])
+                            object_raw = raw_html[new_line+1:end_object]
 
-                        if '.jpg' in object_raw or 'png' in object_raw or '.ico' in object_raw or '.gif' in object_raw or '.jpeg' in object_raw:
+                        if '.jpg' in object_raw \
+                                or 'png' in object_raw \
+                                or '.ico' in object_raw \
+                                or '.gif' in object_raw \
+                                or '.jpeg' in object_raw:
                             break
                     except Exception as e:
                         print(e)
@@ -113,14 +129,14 @@ class Downloader:
         except OSError as e:
             if e.errno != 17:
                 raise
-            pass
         return
 
     def _download_page(self, url):
         """private method to download the one page"""
         try:
             headers = {}
-            headers['User-Agent'] = "Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/80.0.3987.87 Safari/537.36"
+            headers['User-Agent'] = "Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.36 " \
+                                    "(KHTML, like Gecko) Chrome/80.0.3987.87 Safari/537.36"
             req = urllib.request.Request(url, headers=headers)
             resp = urllib.request.urlopen(req)
             resp_data = str(resp.read())
