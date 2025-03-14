@@ -1,3 +1,5 @@
+# pylint: disable=E0401
+"""Dowloader module for download images"""
 import os
 import time
 import urllib
@@ -7,10 +9,12 @@ from constants import TIME_SLEEP_AFTER_EACH_DOWNLOAD
 
 
 class Downloader:
+    """Main Downloader class"""
     def __init__(self, main_dir_name):
         self.main_dir_name = main_dir_name
 
     def urls(self, keywords, limit):
+        """Process for preparing urls to download"""
         keyword_to_search = [str(item).strip() for item in keywords.split(',')]
         i = 0
         links = []
@@ -45,6 +49,7 @@ class Downloader:
         return links
 
     def download(self, keywords, limit):
+        """downloader method"""
         keyword_to_search = [str(item).strip() for item in keywords.split(',')]
         main_directory = f"{self.main_dir_name}/"
         i = 0
@@ -93,6 +98,7 @@ class Downloader:
             i += 1
 
     def _create_directories(self, main_directory, path):
+        """private method for creating the directories for images"""
         try:
             if not os.path.exists(main_directory):
                 os.makedirs(main_directory)
@@ -111,6 +117,7 @@ class Downloader:
         return
 
     def _download_page(self, url):
+        """private method to download the one page"""
         try:
             headers = {}
             headers['User-Agent'] = "Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/80.0.3987.87 Safari/537.36"
