@@ -1,3 +1,5 @@
+# pylint: disable=E0401
+# pylint: disable=R0902
 """Simple pyxel game for defend the Belarus or Ukranian flag"""
 import random
 import pyxel
@@ -39,6 +41,7 @@ enemies = []
 
 
 class Bullet:
+    """Class for Bullets and their draw"""
     def __init__(self, x, y):
         self.x = x
         self.y = y
@@ -47,29 +50,35 @@ class Bullet:
         bullets.append(self)
 
     def update(self):
+        """local methode for update bullet status"""
         self.x += self.bl_speed
         if self.x + self.bl_speed >= MAIN_WIDTH:
             self.is_alive = False
 
     def draw(self):
+        """local method for draw the bullet on the screen"""
         pyxel.line(self.x + PLAYER_WIDTH, self.y + PLAYER_HEIGHT - 3,
                    self.x + PLAYER_WIDTH + 2, self.y + PLAYER_HEIGHT - 3, 10)
 
 
 class PlayerShoot:
+    """The class for player shooting"""
     def __init__(self):
         self.x_bul = 0
 
     def update(self):
+        """local update status for player shooting"""
         while self.x_bul <= MAIN_WIDTH:
             self.x_bul += 1
 
     def draw(self, x, y):
+        """draw the players bullets on the screen"""
         pyxel.line(x + PLAYER_WIDTH, y + PLAYER_HEIGHT - 3,
                    x + PLAYER_WIDTH + 2, y + PLAYER_HEIGHT - 3, 10)
 
 
 class Player:
+    """class for the main player object"""
     def __init__(self, x, y):
         self.pl_x = x
         self.pl_y = y
@@ -81,6 +90,7 @@ class Player:
         self.player_shoot = PlayerShoot()
 
     def update(self):
+        """update the player object"""
         # player key control movement arrow keys
         if pyxel.btn(pyxel.KEY_RIGHT) and self.pl_x <= MAIN_WIDTH - 12:
             self.pl_x += self.pl_speed
@@ -109,6 +119,7 @@ class Player:
             Bullet(self.pl_x, self.pl_y)
 
     def draw(self):
+        """draw the player on the screen"""
         pyxel.blt(self.pl_x, self.pl_y, 0, 0, 0, 10, 12)
         if self.shoot:
             self.bullet_counter += 1
@@ -117,6 +128,7 @@ class Player:
 
 
 class Enemy:
+    """the class for the enemy objects. could be many"""
     def __init__(self):
         self.en_x = ENEMY_START_X
         self.en_y = random.randint(MAIN_GAME_FRAME, MAIN_HEIGHT)
@@ -128,11 +140,13 @@ class Enemy:
         enemies.append(self)
 
     def enemy_restart(self):
+        """restart the enemy object after killing or disapearing"""
         self.is_alive = False
         self.en_x = ENEMY_START_X
         self.en_y = random.randint(MAIN_GAME_FRAME, MAIN_HEIGHT)
 
     def update(self):
+        """update the enemy object"""
         if self.en_x == ENEMY_START_X:
             self.is_killed = False
             self.is_gone = False
@@ -153,10 +167,12 @@ class Enemy:
             self.enemy_restart()
 
     def draw(self, g=1):
+        """draw the enemy on the game window"""
         pyxel.blt(self.en_x, self.en_y, 0, 16 + 8 * g, 0, 8, 8)
 
 
 class Background:
+    """background class - the menu with start and game over screens"""
     def __init__(self):
         self.menu_line_y = PLAYER_HEIGHT + MAIN_GAME_FRAME - 2
         self.level_end_tab = len(MENU_TEXT_LEVEL) * 6
@@ -171,6 +187,7 @@ class Background:
 
 
 class Defender:
+    """class for main game process"""
     def __init__(self):
         pyxel.init(MAIN_WIDTH, MAIN_HEIGHT, title=MAIN_TITLE)
         pyxel.load("defender.pyxres")
@@ -190,10 +207,12 @@ class Defender:
         pyxel.run(self.update, self.draw)
 
     def check_enemies(self):
+        """check the current enemy on the screen"""
         if len(enemies) < self.enemy_number:
             Enemy()
 
     def update_enemies(self):
+        """update all enemy objects on the screen"""
         for enemy in enemies:
             enemy.update()
             if self.current_scene == SCENE_NAME_MAIN_ZYVE:
@@ -214,20 +233,24 @@ class Defender:
             self.enemy_number = INIT_ENEMY_NUMBER + self.level
 
     def draw_enemies(self):
+        """draw the enemies on the game window"""
         for enemy in enemies:
             enemy.draw(self.current_scene - 1)
 
     def update_bullets(self):
+        """update the status fo the players bullets"""
         for idx, bullet in enumerate(bullets):
             bullet.update()
             if bullet.is_alive == False:
                 del bullets[idx]
 
     def draw_bullets(self):
+        """draw the bullets from user"""
         for bullet in bullets:
             bullet.draw()
 
     def draw_menu_items(self):
+        """draw the menu"""
         pyxel.text(MAIN_GAME_FRAME, MAIN_GAME_FRAME,
                    f'{MENU_TEXT_LEVEL}{self.level}', MENU_COLOR)
         pyxel.text(MAIN_GAME_FRAME + 42, MAIN_GAME_FRAME,
@@ -238,6 +261,7 @@ class Defender:
                    f'{MENU_TEXT_ENEMY}{self.enemy_score}', MENU_COLOR)
 
     def draw_movements(self):
+        """draw all the movements on the game screen"""
         pyxel.cls(0)
         self.player.draw()
         self.background.draw()
@@ -245,6 +269,7 @@ class Defender:
         self.draw_bullets()
 
     def draw_main_scene_zyve(self):
+        """draw the subgame zyve belarus"""
         self.draw_movements()
         # flag drawing
         pyxel.rect(MAIN_GAME_FRAME, self.bchb_y_up, 20, 5, 7)
@@ -254,6 +279,7 @@ class Defender:
         self.draw_menu_items()
 
     def draw_main_scene_slava(self):
+        """draw the game window"""
         self.draw_movements()
         # flag drawing
         pyxel.rect(MAIN_GAME_FRAME, self.ukr_y_up, 20, 7, 12)
@@ -262,6 +288,7 @@ class Defender:
         self.draw_menu_items()
 
     def update_main_scene_zyve(self):
+        """update the game subgame zyve belarus status"""
         self.check_enemies()
         self.player.update()
         self.update_enemies()
@@ -270,6 +297,7 @@ class Defender:
             self.current_scene = SCENE_NAME_GAMEOVER
 
     def draw_start_scene(self):
+        """draw the main start scene"""
         pyxel.cls(0)
         pyxel.text(5, 5, "Game Control keys:", 9)
         pyxel.text(10, 15, " - Arrow keys for player movement", 9)
@@ -284,12 +312,14 @@ class Defender:
                    SCENE_MAIN_TEXT_SLAVA, pyxel.frame_count % 16)
 
     def update_start_scene(self):
+        """update the game start scene"""
         if pyxel.btnp(pyxel.KEY_1) or pyxel.btnp(pyxel.GAMEPAD1_BUTTON_X):
             self.current_scene = SCENE_NAME_MAIN_ZYVE
         if pyxel.btnp(pyxel.KEY_2) or pyxel.btnp(pyxel.GAMEPAD1_BUTTON_X):
             self.current_scene = SCENE_NAME_MAIN_SLAVA
 
     def draw_gameover_scene(self):
+        """draw the game over screen"""
         pyxel.cls(0)
         pyxel.text(90, 5, "GAME OVER!", 9)
         pyxel.text(10, 15, f" - You finished with level: {self.level}", 9)
@@ -306,10 +336,12 @@ class Defender:
                    SCENE_MAIN_TEXT_SLAVA, pyxel.frame_count % 16)
 
     def reset_lists(self):
+        """reset the bullets and enemy lists when they met or disappered"""
         bullets.clear()
         enemies.clear()
 
     def update_gameover_scene(self):
+        """update the game over screen"""
         if pyxel.btnp(pyxel.KEY_1) or pyxel.btnp(pyxel.GAMEPAD1_BUTTON_X):
             self.reset_lists()
             self.current_scene = SCENE_NAME_MAIN_ZYVE
@@ -318,6 +350,7 @@ class Defender:
             self.current_scene = SCENE_NAME_MAIN_SLAVA
 
     def update(self):
+        """main game update status of the all objects"""
         if self.current_scene == SCENE_NAME_START:
             self.update_start_scene()
         if self.current_scene == SCENE_NAME_MAIN_ZYVE:
@@ -328,6 +361,7 @@ class Defender:
             self.update_gameover_scene()
 
     def draw(self):
+        """draw the all objects on the screen"""
         if self.current_scene == SCENE_NAME_START:
             self.draw_start_scene()
         if self.current_scene == SCENE_NAME_MAIN_ZYVE:
