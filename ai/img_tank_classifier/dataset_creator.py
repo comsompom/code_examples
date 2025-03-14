@@ -1,21 +1,35 @@
-from PIL import Image
+# pylint: disable=E0401
+"""The dataset creator. Finds and download the images to the labels folder"""
 import os
+from PIL import Image
 from downloader import Downloader
 from constants import (MAIN_DIR_NAME, IMAGE_LABEL_LIST, IMAGE_WIDTH, IMAGE_HEIGHT,
                        PERCENTAGE_AVERAGE_RESIZE)
 
 
 class DatasetCreator:
+    """
+        The main class for dataset create
+        to use it:
+
+        labels_dataset = DatasetCreator(20, section_summary=True)
+        image_height = labels_dataset.label_images_dataset_creator()
+
+        First parameter for the number of the sample images to download
+        Second parameter for showing the summary while module processing
+    """
 
     def __init__(self, number_image_samples, section_summary=True):
         self.number_image_samples = number_image_samples
         self.section_summary = section_summary
 
     def _label_images_downloader(self, image_label) -> None:
+        """private method to label images using the Downloader class"""
         image_sample_downloader = Downloader(MAIN_DIR_NAME)
         image_sample_downloader.download(keywords=image_label, limit=self.number_image_samples)
 
     def label_images_dataset_creator(self) -> int:
+        """Create the labeled dataset"""
         heights_set = set()
         error_files_list = []
 
@@ -87,7 +101,3 @@ class DatasetCreator:
                 print(f"LABEL: {label} has {len(os.listdir(cur_label_dir))} images")
 
         return average_height
-
-
-# labels_dataset = DatasetCreator(20, section_summary=True)
-# image_height = labels_dataset.label_images_dataset_creator()
