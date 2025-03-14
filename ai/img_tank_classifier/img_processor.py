@@ -1,21 +1,28 @@
 # pylint: disable=E0401
+# pylint: disable=C0303
+# pylint: disable=R0902
+# pylint: disable=C0103
+# pylint: disable=W0612
+# pylint: disable=W0201
 """The main module for AI ML image classification"""
 import os
 import tensorflow as tf
 import numpy as np
 import requests
 from dataset_creator import DatasetCreator
-from constants import (MAIN_DIR_NAME, BATCH_SIZE, IMAGE_WIDTH, IMAGE_HEIGHT, EACH_LABEL_COUNT, MODEL_OPTIMIZER,
-                       MODEL_LAYER_ACTIVATION, MODEL_EPOCH, PRETRAINED_WEIGHTS_PATH)
+from constants import (MAIN_DIR_NAME, BATCH_SIZE, IMAGE_WIDTH, IMAGE_HEIGHT,
+                       EACH_LABEL_COUNT, MODEL_OPTIMIZER,
+                       MODEL_LAYER_ACTIVATION, MODEL_EPOCH,
+                       PRETRAINED_WEIGHTS_PATH)
 
 
 class ImgClassifierProcessor:
     """The main class for use the AI ML for classification images"""
 
-    def __init__(self, 
-                 new_dataset=True, 
-                 show_logs=True, 
-                 use_weights=False, 
+    def __init__(self,
+                 new_dataset=True,
+                 show_logs=True,
+                 use_weights=False,
                  model_augment=False):
         self.image_width = IMAGE_WIDTH
         self.image_height = IMAGE_HEIGHT
@@ -71,15 +78,15 @@ class ImgClassifierProcessor:
 
         num_classes = len(self.class_names_list)
         self.model = tf.keras.Sequential([
-            tf.keras.layers.Rescaling(1. / 255, input_shape=(self.image_height, 
+            tf.keras.layers.Rescaling(1. / 255, input_shape=(self.image_height,
                                                              self.image_width, 3)),
-            tf.keras.layers.Conv2D(16, 3, padding='same', 
+            tf.keras.layers.Conv2D(16, 3, padding='same',
                                    activation=MODEL_LAYER_ACTIVATION),
             tf.keras.layers.MaxPooling2D(),
-            tf.keras.layers.Conv2D(32, 3, padding='same', 
+            tf.keras.layers.Conv2D(32, 3, padding='same',
                                    activation=MODEL_LAYER_ACTIVATION),
             tf.keras.layers.MaxPooling2D(),
-            tf.keras.layers.Conv2D(64, 3, padding='same', 
+            tf.keras.layers.Conv2D(64, 3, padding='same',
                                    activation=MODEL_LAYER_ACTIVATION),
             tf.keras.layers.MaxPooling2D(),
             tf.keras.layers.Flatten(),
@@ -113,8 +120,8 @@ class ImgClassifierProcessor:
         """private method for augment the images for making the labeled data more"""
         data_augmentation = tf.keras.Sequential(
             [
-                tf.keras.layers.RandomFlip("horizontal", 
-                                           input_shape=(self.image_height, 
+                tf.keras.layers.RandomFlip("horizontal",
+                                           input_shape=(self.image_height,
                                                         self.image_width, 3)),
                 tf.keras.layers.RandomRotation(0.1),
                 tf.keras.layers.RandomZoom(0.1),
@@ -124,13 +131,13 @@ class ImgClassifierProcessor:
         self.model = tf.keras.Sequential([
             data_augmentation,
             tf.keras.layers.Rescaling(1. / 255),
-            tf.keras.layers.Conv2D(16, 3, padding='same', 
+            tf.keras.layers.Conv2D(16, 3, padding='same',
                                    activation=MODEL_LAYER_ACTIVATION),
             tf.keras.layers.MaxPooling2D(),
-            tf.keras.layers.Conv2D(32, 3, padding='same', 
+            tf.keras.layers.Conv2D(32, 3, padding='same',
                                    activation=MODEL_LAYER_ACTIVATION),
             tf.keras.layers.MaxPooling2D(),
-            tf.keras.layers.Conv2D(64, 3, padding='same', 
+            tf.keras.layers.Conv2D(64, 3, padding='same',
                                    activation=MODEL_LAYER_ACTIVATION),
             tf.keras.layers.MaxPooling2D(),
             tf.keras.layers.Dropout(0.2),
