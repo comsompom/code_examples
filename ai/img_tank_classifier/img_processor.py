@@ -1,6 +1,8 @@
+# pylint: disable=E0401
+"""The main module for AI ML image classification"""
+import os
 import tensorflow as tf
 import numpy as np
-import os
 import requests
 from dataset_creator import DatasetCreator
 from constants import (MAIN_DIR_NAME, BATCH_SIZE, IMAGE_WIDTH, IMAGE_HEIGHT, EACH_LABEL_COUNT, MODEL_OPTIMIZER,
@@ -8,8 +10,13 @@ from constants import (MAIN_DIR_NAME, BATCH_SIZE, IMAGE_WIDTH, IMAGE_HEIGHT, EAC
 
 
 class ImgClassifierProcessor:
+    """The main class for use the AI ML for classification images"""
 
-    def __init__(self, new_dataset=True, show_logs=True, use_weights=False, model_augment=False):
+    def __init__(self, 
+                 new_dataset=True, 
+                 show_logs=True, 
+                 use_weights=False, 
+                 model_augment=False):
         self.image_width = IMAGE_WIDTH
         self.image_height = IMAGE_HEIGHT
         self.dataset_root_dir = MAIN_DIR_NAME
@@ -22,12 +29,14 @@ class ImgClassifierProcessor:
         self.model = None
 
     def _create_new_dataset(self):
+        """private method for creating the new dataset"""
         labels_dataset = DatasetCreator(EACH_LABEL_COUNT, self.show_logs)
         self.image_height = labels_dataset.label_images_dataset_creator()
         if self.show_logs:
             print(f"New Images Dataset created at the: '{self.dataset_root_dir}' Folder")
 
     def _create_and_compile_model(self) -> None:
+        """the private method for creating and compile the ML model"""
         self.train_ds = tf.keras.utils.image_dataset_from_directory(
             self.dataset_root_dir,
             validation_split=0.2,
@@ -62,12 +71,16 @@ class ImgClassifierProcessor:
 
         num_classes = len(self.class_names_list)
         self.model = tf.keras.Sequential([
-            tf.keras.layers.Rescaling(1. / 255, input_shape=(self.image_height, self.image_width, 3)),
-            tf.keras.layers.Conv2D(16, 3, padding='same', activation=MODEL_LAYER_ACTIVATION),
+            tf.keras.layers.Rescaling(1. / 255, input_shape=(self.image_height, 
+                                                             self.image_width, 3)),
+            tf.keras.layers.Conv2D(16, 3, padding='same', 
+                                   activation=MODEL_LAYER_ACTIVATION),
             tf.keras.layers.MaxPooling2D(),
-            tf.keras.layers.Conv2D(32, 3, padding='same', activation=MODEL_LAYER_ACTIVATION),
+            tf.keras.layers.Conv2D(32, 3, padding='same', 
+                                   activation=MODEL_LAYER_ACTIVATION),
             tf.keras.layers.MaxPooling2D(),
-            tf.keras.layers.Conv2D(64, 3, padding='same', activation=MODEL_LAYER_ACTIVATION),
+            tf.keras.layers.Conv2D(64, 3, padding='same', 
+                                   activation=MODEL_LAYER_ACTIVATION),
             tf.keras.layers.MaxPooling2D(),
             tf.keras.layers.Flatten(),
             tf.keras.layers.Dense(128, activation=MODEL_LAYER_ACTIVATION),
@@ -80,11 +93,13 @@ class ImgClassifierProcessor:
             self.model.summary()
 
     def _compile_model(self) -> None:
+        """private method for compiling the model"""
         self.model.compile(optimizer=MODEL_OPTIMIZER,
                            loss=tf.keras.losses.SparseCategoricalCrossentropy(from_logits=True),
                            metrics=['accuracy'])
 
     def _train_model(self) -> None:
+        """private method for training the model"""
         self.model.fit(
             self.train_ds,
             validation_data=self.val_ds,
@@ -95,9 +110,12 @@ class ImgClassifierProcessor:
         self.trained = True
 
     def _model_dataset_augmentation(self) -> None:
+        """private method for augment the images for making the labeled data more"""
         data_augmentation = tf.keras.Sequential(
             [
-                tf.keras.layers.RandomFlip("horizontal", input_shape=(self.image_height, self.image_width, 3)),
+                tf.keras.layers.RandomFlip("horizontal", 
+                                           input_shape=(self.image_height, 
+                                                        self.image_width, 3)),
                 tf.keras.layers.RandomRotation(0.1),
                 tf.keras.layers.RandomZoom(0.1),
             ]
@@ -106,11 +124,14 @@ class ImgClassifierProcessor:
         self.model = tf.keras.Sequential([
             data_augmentation,
             tf.keras.layers.Rescaling(1. / 255),
-            tf.keras.layers.Conv2D(16, 3, padding='same', activation=MODEL_LAYER_ACTIVATION),
+            tf.keras.layers.Conv2D(16, 3, padding='same', 
+                                   activation=MODEL_LAYER_ACTIVATION),
             tf.keras.layers.MaxPooling2D(),
-            tf.keras.layers.Conv2D(32, 3, padding='same', activation=MODEL_LAYER_ACTIVATION),
+            tf.keras.layers.Conv2D(32, 3, padding='same', 
+                                   activation=MODEL_LAYER_ACTIVATION),
             tf.keras.layers.MaxPooling2D(),
-            tf.keras.layers.Conv2D(64, 3, padding='same', activation=MODEL_LAYER_ACTIVATION),
+            tf.keras.layers.Conv2D(64, 3, padding='same', 
+                                   activation=MODEL_LAYER_ACTIVATION),
             tf.keras.layers.MaxPooling2D(),
             tf.keras.layers.Dropout(0.2),
             tf.keras.layers.Flatten(),
@@ -124,10 +145,12 @@ class ImgClassifierProcessor:
             self.model.summary()
 
     def _load_pretrained_weights(self) -> None:
+        """private method for loading the pretrained weights"""
         if os.path.exists(PRETRAINED_WEIGHTS_PATH):
             self.model.load_weights(PRETRAINED_WEIGHTS_PATH)
 
     def model_train_process(self) -> None:
+        """the main method for training the model"""
         if self.new_dataset:
             self._create_new_dataset()
         self._create_and_compile_model()
@@ -140,11 +163,13 @@ class ImgClassifierProcessor:
             self._train_model()
 
     def _create_model_from_weights(self) -> None:
+        """private method for create the model with saved weights"""
         self._create_and_compile_model()
         self._load_pretrained_weights()
         self.trained = True
 
     def _predict_the_image(self, img_url: str) -> dict:
+        """private method for making the prediction of the image"""
         predict_image_name = 'predict_image.jpg'
         request_response = requests.get(img_url, allow_redirects=True)
         with open(predict_image_name, 'wb') as img_file:
@@ -166,6 +191,7 @@ class ImgClassifierProcessor:
         }
 
     def model_prediction_process(self, img_url: str) -> dict:
+        """the main method for making the prediction from trained model"""
         if self.trained:
             response = self._predict_the_image(img_url)
         else:
@@ -178,7 +204,11 @@ class ImgClassifierProcessor:
         return response
 
 
-img_url = "https://thediplomat.com/wp-content/uploads/2016/07/sizes/medium/thediplomat_2016-07-19_16-31-08.jpg"
-image_processor = ImgClassifierProcessor(new_dataset=False, show_logs=True, use_weights=True, model_augment=False)
-prediction = image_processor.model_prediction_process(img_url)
+IMG_URL = "https://thediplomat.com/wp-content/uploads/2016/07/sizes" \
+          "/medium/thediplomat_2016-07-19_16-31-08.jpg"
+image_processor = ImgClassifierProcessor(new_dataset=False,
+                                         show_logs=True,
+                                         use_weights=True,
+                                         model_augment=False)
+prediction = image_processor.model_prediction_process(IMG_URL)
 print(prediction)
