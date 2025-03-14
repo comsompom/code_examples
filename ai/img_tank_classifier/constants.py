@@ -1,3 +1,4 @@
+"""The constants for the dataset creator module"""
 MAIN_DIR_NAME = 'labels'
 IMAGE_LABEL_LIST = ['T 72 tank', 'T 80 tank', 'T 90 tank']
 
@@ -41,6 +42,7 @@ Lists of the other russian orcks military techick
 ['BMP-1', 'BMP-2', 'BMP-3', 'BMD-2', 'BMD-4']
 
 "Armored personnel carriers"
-['MT-LB', 'MT-LB', 'BTR-50', 'BTR-60', 'BTR-70', 'BTR-80', 'BTR-82', 'BTR-D', 'BTR-MD Rakushka', 'BMO-T']
+['MT-LB', 'MT-LB', 'BTR-50', 'BTR-60', 'BTR-70', 'BTR-80', 'BTR-82', 'BTR-D', 
+'BTR-MD Rakushka', 'BMO-T']
 
 '''
