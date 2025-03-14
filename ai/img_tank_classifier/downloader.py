@@ -1,10 +1,13 @@
 # pylint: disable=E0401
+# pylint: disable=W0718
+# pylint: disable=R0914
+# pylint: disable=R1732
 """Dowloader module for download images"""
 import os
 import time
 import urllib
-import requests
 from urllib.parse import quote
+import requests
 from constants import TIME_SLEEP_AFTER_EACH_DOWNLOAD
 
 
@@ -129,7 +132,6 @@ class Downloader:
         except OSError as e:
             if e.errno != 17:
                 raise
-        return
 
     def _download_page(self, url):
         """private method to download the one page"""
