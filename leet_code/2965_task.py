@@ -18,7 +18,7 @@ Input: grid = [[9,1,7],[8,9,2],[3,4,6]]
 Output: [9,5]
 Explanation: Number 9 is repeated and number 5 is missing so the answer is [9,5].
 """
-def find_missing_and_repeated_values(self, grid: List[List[int]]) -> List[int]:
+def find_missing_and_repeated_values(grid: List[List[int]]) -> List[int]:
     """return found the repeating and missing numbers"""
     range_size = len(grid[1]) ** 2
     list_grid_nums = []
