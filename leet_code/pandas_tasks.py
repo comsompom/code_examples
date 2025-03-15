@@ -1,3 +1,4 @@
+# pylint: disable=E0401
 """leetcode pandas tasks solutions"""
 # 2879. Display the First Three Rows
 import pandas as pd
