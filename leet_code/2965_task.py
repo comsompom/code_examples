@@ -1,4 +1,5 @@
 # pylint: disable=E0401
+# pylint: disable=E0602
 """
 2965. Find Missing and Repeated Values
 You are given a 0-indexed 2D integer matrix grid of size n * n with values in the range [1, n2]. 
@@ -17,7 +18,8 @@ Output: [9,5]
 Explanation: Number 9 is repeated and number 5 is missing so the answer is [9,5].
 """
 class Solution:
-    def findMissingAndRepeatedValues(self, grid: List[List[int]]) -> List[int]:
+    def find_missing_and_repeated_values(self, grid: List[List[int]]) -> List[int]:
+        """return found the repeating and missing numbers"""
         range_size = len(grid[1]) ** 2
         list_grid_nums = []
         for x in grid:
