@@ -20,9 +20,6 @@ jobs:
         pip install pylint
     - name: Analysing the code with pylint
       run: |
-        pylint $(git ls-files 'bots/telegram_bots/*.py')
-        pylint $(git ls-files 'defi_example/*.py')
-        pylint $(git ls-files 'simple_fast_api_array/*.py')
         pylint $(git ls-files 'ai/face_rec_system/*.py')
         pylint $(git ls-files 'ai/gpt_standalone/*.py')
         pylint $(git ls-files 'ai/hugging_face_hub_login/*.py')
@@ -31,4 +28,8 @@ jobs:
         pylint $(git ls-files 'ai/nlp_text_generator/*.py')
         pylint $(git ls-files 'ai/nlp_text_summar/*.py')
         pylint $(git ls-files 'ai/use_multimodal_gemma/*.py')
+        pylint $(git ls-files 'bots/telegram_bots/*.py')
+        pylint $(git ls-files 'defi_example/*.py')
+        pylint $(git ls-files 'leet_code/*.py')
         pylint $(git ls-files 'pyxel_games/defender/*.py')
+        pylint $(git ls-files 'simple_fast_api_array/*.py')
