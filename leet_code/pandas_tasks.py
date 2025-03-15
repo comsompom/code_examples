@@ -1,5 +1,6 @@
 # pylint: disable=E0401
 # pylint: disable=E0602
+# pylint: disable=W0105
 """leetcode pandas tasks solutions"""
 # 2879. Display the First Three Rows
 import pandas as pd
@@ -54,7 +55,7 @@ The result format is in the following example.
 '''
 def create_bonus_column(employees: pd.DataFrame) -> pd.DataFrame:
     """create and extra column"""
-    employees['bonus'] = (employees['salary'] * 2)
+    employees['bonus'] = employees['salary'] * 2
     return employees
 
 # 2882. Drop Duplicate Rows

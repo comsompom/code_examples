@@ -17,6 +17,6 @@ Input: words = ["leetcode","win","loops","success"], pref = "code"
 Output: 0
 Explanation: There are no strings that contain "code" as a prefix.
 """
-def prefix_count(self, words: List[str], pref: str) -> int:
+def prefix_count(words: List[str], pref: str) -> int:
     """return the count of the prefix"""
     return len([x for x in words if x.startswith(pref)])
