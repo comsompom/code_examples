@@ -1,5 +1,6 @@
 # pylint: disable=E0401
 # pylint: disable=E0602
+# pylint: disable=C0103
 """
 2965. Find Missing and Repeated Values
 You are given a 0-indexed 2D integer matrix grid of size n * n with values in the range [1, n2]. 
@@ -17,17 +18,16 @@ Input: grid = [[9,1,7],[8,9,2],[3,4,6]]
 Output: [9,5]
 Explanation: Number 9 is repeated and number 5 is missing so the answer is [9,5].
 """
-class Solution:
-    def find_missing_and_repeated_values(self, grid: List[List[int]]) -> List[int]:
-        """return found the repeating and missing numbers"""
-        range_size = len(grid[1]) ** 2
-        list_grid_nums = []
-        for x in grid:
-            list_grid_nums.extend(x)
+def find_missing_and_repeated_values(self, grid: List[List[int]]) -> List[int]:
+    """return found the repeating and missing numbers"""
+    range_size = len(grid[1]) ** 2
+    list_grid_nums = []
+    for x in grid:
+        list_grid_nums.extend(x)
 
-        double_nums_list = [key for key, val in Counter(list_grid_nums).items() if val > 1]
-        uniq_nums_set = set(list_grid_nums)
-        full_nums_set = {x for x in range(1, range_size + 1)}
-        missed_nums_list = list(full_nums_set.difference(uniq_nums_set))
-        double_nums_list.extend(missed_nums_list)
-        return double_nums_list
+    double_nums_list = [key for key, val in Counter(list_grid_nums).items() if val > 1]
+    uniq_nums_set = set(list_grid_nums)
+    full_nums_set = set(range(1, range_size + 1))
+    missed_nums_list = list(full_nums_set.difference(uniq_nums_set))
+    double_nums_list.extend(missed_nums_list)
+    return double_nums_list

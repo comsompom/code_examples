@@ -1,5 +1,6 @@
 # pylint: disable=E0401
 # pylint: disable=E0602
+# pylint: disable=C0103
 """
 2185. Counting Words With a Given Prefix
 You are given an array of strings words and a string pref.
@@ -16,7 +17,6 @@ Input: words = ["leetcode","win","loops","success"], pref = "code"
 Output: 0
 Explanation: There are no strings that contain "code" as a prefix.
 """
-class Solution:
-    def prefix_count(self, words: List[str], pref: str) -> int:
-        """return the count of the prefix"""
-        return len([x for x in words if x.startswith(pref)])
+def prefix_count(self, words: List[str], pref: str) -> int:
+    """return the count of the prefix"""
+    return len([x for x in words if x.startswith(pref)])
