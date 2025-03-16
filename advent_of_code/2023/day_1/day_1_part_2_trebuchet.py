@@ -1,6 +1,7 @@
 # pylint: disable=E0401
 # pylint: disable=C0103
 # pylint: disable=W1514
+# pylint: disable=C0206
 """simple script to solve day 1 problem 2"""
 numbers_match = {
     '1': 1,
@@ -28,9 +29,9 @@ calibration_val = 0
 
 with open(elf_file) as elf_txt:
     for line in elf_txt.readlines():
-        found_left = {line.find(x): numbers_match[x] for x in numbers_match.keys()
+        found_left = {line.find(x): numbers_match[x] for x in numbers_match
                       if line.find(x) >= 0}
-        found_right = {line.rfind(x): numbers_match[x] for x in numbers_match.keys()
+        found_right = {line.rfind(x): numbers_match[x] for x in numbers_match
                        if line.find(x) >= 0}
         first_num = int(found_left[min(found_left.keys())]) * 10
         last_num = int(found_right[max(found_right.keys())])
