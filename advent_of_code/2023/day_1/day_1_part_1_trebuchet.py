@@ -1,3 +1,6 @@
+# pylint: disable=E0401
+# pylint: disable=C0103
+"""script to solve day 1 problem 1"""
 import re
 
 

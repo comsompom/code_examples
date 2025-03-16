@@ -1,3 +1,6 @@
+# pylint: disable=E0401
+# pylint: disable=C0103
+"""simple script to solve day 1 problem 2"""
 numbers_match = {
     '1': 1,
     "2": 2,
