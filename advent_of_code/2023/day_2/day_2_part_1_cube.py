@@ -1,3 +1,5 @@
+# pylint: disable=C0103
+"""Solve day 1 problem 1"""
 elf_file = 'elf_file_part1.txt'
 total_ids = 0
 games_dict = {

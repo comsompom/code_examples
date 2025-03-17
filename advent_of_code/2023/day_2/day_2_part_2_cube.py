@@ -1,3 +1,6 @@
+# pylint: disable=C0103
+# pylint: disable=E0401
+"""Solve day 2 problem 2"""
 import copy
 
 
