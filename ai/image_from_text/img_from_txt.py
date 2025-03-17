@@ -56,8 +56,9 @@ def image_creator(prompt: str, neg_prompt: str, img_name: str) -> None:
 
 text_from_url = extract_text_from_url(URL)
 summary = summarize_text(text_from_url)
-neg_prompt = "nsfw, bad quality, bad anatomy, worst quality, low quality, low resolutions, " \
-             "extra fingers, blur, blurry, ugly, wrongs proportions, watermark, image " \
-             "artifacts, lowres, ugly, jpeg artifacts, deformed, noisy image"
+neg_prompt = "nsfw, bad quality, bad anatomy, worst quality, low quality, " \
+             "low resolutions, extra fingers, blur, blurry, ugly, wrongs " \
+             "proportions, watermark, image artifacts, lowres, ugly, " \
+             "jpeg artifacts, deformed, noisy image"
 
 image_creator(summary, neg_prompt, IMAGE_NAME)
