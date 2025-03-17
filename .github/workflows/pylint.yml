@@ -21,6 +21,7 @@ jobs:
     - name: Analysing the code with pylint
       run: |
         pylint $(git ls-files 'advent_of_code/2023/day_1/*.py')
+        pylint $(git ls-files 'advent_of_code/2023/day_2/*.py')
         pylint $(git ls-files 'ai/face_rec_system/*.py')
         pylint $(git ls-files 'ai/gpt_standalone/*.py')
         pylint $(git ls-files 'ai/hugging_face_hub_login/*.py')
