@@ -20,25 +20,29 @@ def show_result():
     person_filename = secure_filename('person.png')
     group_filename = secure_filename('find_in_group.JPG')
 
-    person_image = face_recognition.load_image_file(os.path.join(app.config['UPLOAD'],
-                                                                 person_filename))
-    group_persons = face_recognition.load_image_file(os.path.join(app.config['UPLOAD'],
-                                                                  group_filename))
+    person_image = face_recognition.load_image_file(
+        os.path.join(app.config['UPLOAD'], person_filename))
+    group_persons = face_recognition.load_image_file(
+        os.path.join(app.config['UPLOAD'], group_filename))
 
     person_encodings = face_recognition.face_encodings(person_image)
-    face_loc_list = face_recognition.face_locations(group_persons, model='hog')
-    all_face_found_encodings = face_recognition.face_encodings(group_persons,
-                                                               face_loc_list)
+    face_loc_list = face_recognition.face_locations(group_persons,
+                                                    model='hog')
+    all_face_found_encodings = face_recognition.face_encodings(
+        group_persons, face_loc_list)
 
     pil_image = Image.fromarray(group_persons)
     draw_obj = ImageDraw.Draw(pil_image)
 
     for idx, person_found in enumerate(all_face_found_encodings):
-        result = face_recognition.compare_faces(person_encodings, person_found)
+        result = face_recognition.compare_faces(person_encodings,
+                                                person_found)
 
         if result[0]:
             top, right, bottom, left = face_loc_list[idx]
-            draw_obj.rectangle([left, top, right, bottom], outline='red', width=5)
+            draw_obj.rectangle([left, top, right, bottom],
+                               outline='red',
+                               width=5)
             pil_image.save(os.path.join(app.config['UPLOAD'], group_filename))
 
     return render_template('person_image.html',
