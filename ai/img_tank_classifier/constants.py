@@ -1,3 +1,4 @@
+# noqa: E501,W291
 """The constants for the dataset creator module"""
 MAIN_DIR_NAME = 'labels'
 IMAGE_LABEL_LIST = ['T 72 tank', 'T 80 tank', 'T 90 tank']
