@@ -1,9 +1,11 @@
 # pylint: disable=E0401
+# pylint: disable=C0103
+# pylint: disable=C0114
 elf_file = 'elf_text_4_1.txt'
 total_wins = 0
 
 
-with open(elf_file) as elf_txt:
+with open(elf_file, "r") as elf_txt:
     for line in elf_txt.readlines():
         two_cards = line.replace('\n', '').split(':')[1]
         win_numbers = set(two_cards.split('|')[0].split())
