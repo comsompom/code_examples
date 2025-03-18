@@ -1,10 +1,12 @@
+# pylint: disable=E0401
+# pylint: disable=C0103
 '''
 TBD Check matrix list for symbol, add num to list, sum list
 536488
 534749
 '''
-import numpy as np
 import re
+import numpy as np
 
 
 elf_file = 'elf_txt_3_1.txt'
@@ -16,11 +18,12 @@ numbers_list = []
 not_numbers_set = set()
 total_sum = 0
 
-with open(elf_file) as elf_txt:
+with open(elf_file, "r") as elf_txt:
     for line in elf_txt.readlines():
         cur_line = line.replace('\n', '').replace('.', ' ')
         cur_line_num = line.replace('\n', '').replace('*', '.').replace('.', ' ')
-        sub_list = [re.sub(r'[^0-9]', '', x) for x in cur_line_num.split() if len(re.sub(r'[^0-9]', '', x)) > 0]
+        sub_list = [re.sub(r'[^0-9]', '', x) for x in cur_line_num.split() if
+                    len(re.sub(r'[^0-9]', '', x)) > 0]
         # print(sub_list)
         matrix_symbols.append(sub_list)
         cur_list = [x for x in cur_line]

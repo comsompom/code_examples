@@ -1,3 +1,4 @@
+# pylint: disable=E0401
 elf_file = 'elf_text_4_1.txt'
 total_wins = 0
 
