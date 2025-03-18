@@ -1,5 +1,6 @@
 # pylint: disable=E0401
 # pylint: disable=C0103
+# pylint: disable=W1514
 '''
 TBD Check matrix list for symbol, add num to list, sum list
 536488
@@ -26,7 +27,7 @@ with open(elf_file, "r") as elf_txt:
                     len(re.sub(r'[^0-9]', '', x)) > 0]
         # print(sub_list)
         matrix_symbols.append(sub_list)
-        cur_list = [x for x in cur_line]
+        cur_list = list(cur_line)
         matrix_raw.append(line.replace('\n', '').replace('.', '_').split())
         matrix_base.append(cur_list)
     for idx, element in enumerate(matrix_raw):
