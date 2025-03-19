@@ -7,6 +7,7 @@
 # pylint: disable=W0201
 # pylint: disable=W1514
 # pylint: disable=W0621
+# noqa: E501
 """The main module for text generation"""
 import os
 import requests
@@ -19,10 +20,10 @@ from tensorflow.keras.models import Sequential
 from tensorflow.keras.layers import Dense, LSTM, Embedding
 from tensorflow.keras.preprocessing.sequence import pad_sequences
 
-from constants import (SOURCE_LINK, SOURCE_PATH, NUMERIC_TEXT, 
-                       MODEL_OPTIMIZER, MODEL_USE_LOSS, UNICODE_TO_ENG_DICT, 
-                       MODEL_PATH, MODEL_EPOCH, MODEL_BATCH_SIZE, LSTM_LENGTH, 
-                       MODEL_LENGTH_GENERATE,SOURCE_LINKS_LIST, 
+from constants import (SOURCE_LINK, SOURCE_PATH, NUMERIC_TEXT,
+                       MODEL_OPTIMIZER, MODEL_USE_LOSS, UNICODE_TO_ENG_DICT,
+                       MODEL_PATH, MODEL_EPOCH, MODEL_BATCH_SIZE, LSTM_LENGTH,
+                       MODEL_LENGTH_GENERATE, SOURCE_LINKS_LIST,
                        PUNCTUATION_SYMBOLS, EXCLUDE_PHRASE_LIST)
 
 
