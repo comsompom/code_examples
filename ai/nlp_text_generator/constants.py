@@ -1,5 +1,5 @@
 # pylint: disable=E0401
-# noqa: E501
+# noqa: E501, W291
 """Constants for text generator AI Processor"""
 # the link for getting the text
 SOURCE_LINK = 'https://ru.wikipedia.org/wiki/%D0%9F%D0%BE%D0%BB%D0%BA_' \
