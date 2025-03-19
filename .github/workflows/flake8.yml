@@ -26,3 +26,4 @@ jobs:
         flake8 $(git ls-files 'ai/gpt_standalone/*.py')
         flake8 $(git ls-files 'ai/hugging_face_hub_login/*.py')
         flake8 $(git ls-files 'ai/image_from_text/*.py')
+        flake8 $(git ls-files 'ai/nlp_text_generator/*.py')
