@@ -7,7 +7,7 @@
 # pylint: disable=W0201
 # pylint: disable=W1514
 # pylint: disable=W0621
-# flake8-in-file-ignores: noqa E501, W291, E127
+# flake8: ignore=E501, W291, E127
 """The main module for text generation"""
 import os
 import requests
