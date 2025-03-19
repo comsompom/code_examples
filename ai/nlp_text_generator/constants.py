@@ -13,10 +13,12 @@ SOURCE_LINKS_LIST = [
 ]
 
 # list for the text data cleaner
-EXCLUDE_PHRASE_LIST = ["gutenberg", "ebook", "Title:", "Translator:", "Release date:",
-                       "updated:", "Illustration:", "Language:", "copyright notice", "Credits:",
-                       "*** START OF THE PROJECT", "preface", "_From the", "_Adapted from",
-                       "Project Gutenberg", "eBook", "_From Church's", "_From Joyce", "Gutenberg",
+EXCLUDE_PHRASE_LIST = ["gutenberg", "ebook", "Title:", "Translator:", 
+                       "Release date:", "updated:", "Illustration:", 
+                       "Language:", "copyright notice", "Credits:",
+                       "*** START OF THE PROJECT", "preface", "_From the", 
+                       "_Adapted from", "Project Gutenberg", "eBook", 
+                       "_From Church's", "_From Joyce", "Gutenberg",
                        "the Project"]
 
 # dir names for the model data and results
