@@ -1,4 +1,5 @@
 # pylint: disable=E0401
+# pylint: disable=C0303
 # flake8: ignore=E501,W291,E127
 """Constants for text generator AI Processor"""
 # the link for getting the text
