@@ -4,6 +4,7 @@
 # pylint: disable=R0911
 # pylint: disable=R0912
 # pylint: disable=W1514
+# pylint: disable=W0621
 elf_file = 'elf_text_7_1.txt'
 cards_strength = ['2', '3', '4', '5', '6', '7', '8', '9', 'T', 'J', 'Q', 'K', 'A']
 cards_list = []
@@ -13,7 +14,7 @@ total_winnings = 0
 
 
 def check_rank(hand_card, hand_dict):
-    check_list = [x for x in hand_dict.values()]
+    check_list = list(hand_dict.values())
     if len(check_list) == 5:
         cur_rank = 0
         total_rank = 0
