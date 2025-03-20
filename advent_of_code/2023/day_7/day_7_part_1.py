@@ -1,3 +1,4 @@
+# pylint: disable=C0103
 elf_file = 'elf_text_7_1.txt'
 cards_strength = ['2', '3', '4', '5', '6', '7', '8', '9', 'T', 'J', 'Q', 'K', 'A']
 cards_list = []
@@ -68,10 +69,12 @@ def set_ordered_rank(check_list, current_order_rank):
 
 
 for x in range(1, 7):
-    temp_list, current_order_rank = set_ordered_rank(list(filter(get_rank_for_sort, cards_list)), current_order_rank)
+    temp_list, current_order_rank = set_ordered_rank(
+        list(filter(get_rank_for_sort, cards_list)), current_order_rank)
     strength_rank += 1
 
-temp_list, current_order_rank = set_ordered_rank(list(filter(get_rank_for_sort, cards_list)), current_order_rank)
+temp_list, current_order_rank = set_ordered_rank(
+    list(filter(get_rank_for_sort, cards_list)), current_order_rank)
 
 for x in cards_list:
     total_winnings += x[1] * x[3]
