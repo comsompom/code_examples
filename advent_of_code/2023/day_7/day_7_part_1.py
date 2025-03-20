@@ -1,4 +1,9 @@
 # pylint: disable=C0103
+# pylint: disable=C0114
+# pylint: disable=C0116
+# pylint: disable=R0911
+# pylint: disable=R0912
+# pylint: disable=W1514
 elf_file = 'elf_text_7_1.txt'
 cards_strength = ['2', '3', '4', '5', '6', '7', '8', '9', 'T', 'J', 'Q', 'K', 'A']
 cards_list = []
@@ -41,8 +46,8 @@ def check_rank(hand_card, hand_dict):
 with open(elf_file) as elf_txt:
     for line in elf_txt.readlines():
         one_card = []
-        hand_dict = dict()
-        hand_card = [x for x in line.replace('\n', '').split()[0]]
+        hand_dict = {}
+        hand_card = list(line.replace('\n', '').split()[0])
         for x in hand_card:
             hand_dict[x] = hand_dict.get(x, 0) + 1
         one_card.append(hand_card)
