@@ -1,3 +1,6 @@
+# pylint: disable=C0114
+# pylint: disable=C0103
+# pylint: disable=W1514
 elf_file = 'elf_text_6_1.txt'
 time_list = []
 dist_list = []
@@ -11,7 +14,7 @@ with open(elf_file) as elf_txt:
     dist_list = raw_list[1]
 
 for idx, time in enumerate(time_list):
-    race_dict = dict()
+    race_dict = {}
     for x in range(int(time)):
         cur_race = x * (int(time) - x)
         if cur_race > int(dist_list[idx]):

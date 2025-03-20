@@ -1,4 +1,6 @@
 # pylint: disable=E0401
+# pylint: disable=C0303
+# flake8: ignore=E501,W291,E127
 """Constants for text generator AI Processor"""
 # the link for getting the text
 SOURCE_LINK = 'https://ru.wikipedia.org/wiki/%D0%9F%D0%BE%D0%BB%D0%BA_' \
@@ -13,10 +15,12 @@ SOURCE_LINKS_LIST = [
 ]
 
 # list for the text data cleaner
-EXCLUDE_PHRASE_LIST = ["gutenberg", "ebook", "Title:", "Translator:", "Release date:",
-                       "updated:", "Illustration:", "Language:", "copyright notice", "Credits:",
-                       "*** START OF THE PROJECT", "preface", "_From the", "_Adapted from",
-                       "Project Gutenberg", "eBook", "_From Church's", "_From Joyce", "Gutenberg",
+EXCLUDE_PHRASE_LIST = ["gutenberg", "ebook", "Title:", "Translator:", 
+                       "Release date:", "updated:", "Illustration:", 
+                       "Language:", "copyright notice", "Credits:",
+                       "*** START OF THE PROJECT", "preface", "_From the", 
+                       "_Adapted from", "Project Gutenberg", "eBook", 
+                       "_From Church's", "_From Joyce", "Gutenberg",
                        "the Project"]
 
 # dir names for the model data and results

@@ -25,7 +25,7 @@ jobs:
         pylint $(git ls-files 'advent_of_code/2023/day_3/*.py')
         pylint $(git ls-files 'advent_of_code/2023/day_4/*.py')
         pylint $(git ls-files 'advent_of_code/2023/day_6/*.py')
-        pylint $(git ls-files 'advent_of_code/2023/day_7/*.py')
+        pylint $(git ls-files 'advent_of_code/2023/day_6/*.py')
         pylint $(git ls-files 'ai/face_rec_system/*.py')
         pylint $(git ls-files 'ai/gpt_standalone/*.py')
         pylint $(git ls-files 'ai/hugging_face_hub_login/*.py')

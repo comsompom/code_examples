@@ -19,10 +19,11 @@ from tensorflow.keras.models import Sequential
 from tensorflow.keras.layers import Dense, LSTM, Embedding
 from tensorflow.keras.preprocessing.sequence import pad_sequences
 
-from constants import (SOURCE_LINK, SOURCE_PATH, NUMERIC_TEXT, MODEL_OPTIMIZER,
-                       MODEL_USE_LOSS, UNICODE_TO_ENG_DICT, MODEL_PATH, MODEL_EPOCH,
-                       MODEL_BATCH_SIZE, LSTM_LENGTH, MODEL_LENGTH_GENERATE,
-                       SOURCE_LINKS_LIST, PUNCTUATION_SYMBOLS, EXCLUDE_PHRASE_LIST)
+from constants import (SOURCE_LINK, SOURCE_PATH, NUMERIC_TEXT,
+                       MODEL_OPTIMIZER, MODEL_USE_LOSS, UNICODE_TO_ENG_DICT,
+                       MODEL_PATH, MODEL_EPOCH, MODEL_BATCH_SIZE, LSTM_LENGTH,
+                       MODEL_LENGTH_GENERATE, SOURCE_LINKS_LIST,
+                       PUNCTUATION_SYMBOLS, EXCLUDE_PHRASE_LIST)
 
 
 class NLPWordPProcessor:
@@ -42,8 +43,10 @@ class NLPWordPProcessor:
         self.result_model_dir = MODEL_PATH
         self.exclude_phrase_list = EXCLUDE_PHRASE_LIST
         self.text_clean = text_clean
-        self.source_text_path = self.source_data_dir + "/source_text_" + self.model_name + ".txt"
-        self.model_weights_path = self.result_model_dir + "/weights_" + self.model_name + ".h5"
+        self.source_text_path = self.source_data_dir + \
+                                "/source_text_" + self.model_name + ".txt"
+        self.model_weights_path = self.result_model_dir + \
+                                  "/weights_" + self.model_name + ".h5"
         self.lstm_length = LSTM_LENGTH
         self.num_text = NUMERIC_TEXT
         self.unicode_to_eng = UNICODE_TO_ENG_DICT
@@ -70,7 +73,8 @@ class NLPWordPProcessor:
         self.text += " "
         self.text += text
         if not self.use_punctuation:
-            self.text = self.text.translate(str.maketrans("", "", self.punctuation_symb))
+            self.text = self.text.translate(
+                str.maketrans("", "", self.punctuation_symb))
         if self.unicode_text:
             self.unicode_text_to_eng_symbols_encoder()
 
@@ -85,7 +89,8 @@ class NLPWordPProcessor:
         self.text += " "
         self.text += text
         if not self.use_punctuation:
-            self.text = self.text.translate(str.maketrans("", "", self.punctuation_symb))
+            self.text = self.text.translate(
+                str.maketrans("", "", self.punctuation_symb))
         if self.unicode_text:
             self.unicode_text_to_eng_symbols_encoder()
 
@@ -183,7 +188,8 @@ class NLPWordPProcessor:
     def build_nlp_model(self):
         """nlp method for building the model"""
         self.model = Sequential()
-        self.model.add(Embedding(self.vocab_size, 50, input_length=self.seq_length))
+        self.model.add(Embedding(self.vocab_size, 50,
+                                 input_length=self.seq_length))
         self.model.add(LSTM(self.lstm_length, return_sequences=True))
         self.model.add(LSTM(self.lstm_length))
         self.model.add(Dense(self.lstm_length, activation='relu'))
@@ -198,8 +204,10 @@ class NLPWordPProcessor:
     def compile_and_train_model(self):
         """compilation and train the model"""
         if self.model_builded:
-            self.model.compile(loss=MODEL_USE_LOSS, optimizer=MODEL_OPTIMIZER, metrics=['accuracy'])
-            self.model.fit(self.X, self.y, batch_size=MODEL_BATCH_SIZE, epochs=MODEL_EPOCH)
+            self.model.compile(loss=MODEL_USE_LOSS, optimizer=MODEL_OPTIMIZER,
+                               metrics=['accuracy'])
+            self.model.fit(self.X, self.y, batch_size=MODEL_BATCH_SIZE,
+                           epochs=MODEL_EPOCH)
             self.model_trained = True
 
     def save_model_weights_to_file(self):
@@ -244,7 +252,8 @@ class NLPWordPProcessor:
                 text_word_list = []
                 for _ in range(MODEL_LENGTH_GENERATE):
                     encoded = self.token.texts_to_sequences([seed_text])
-                    encoded = pad_sequences(encoded, maxlen=self.seq_length, padding='pre')
+                    encoded = pad_sequences(encoded, maxlen=self.seq_length,
+                                            padding='pre')
 
                     y_pred = np.argmax(self.model.predict(encoded), axis=-1)
 
@@ -263,7 +272,8 @@ class NLPWordPProcessor:
 
 
 nlp_model = NLPWordPProcessor("fair_tales", unicode=False, source_format='txt',
-                              use_punctuation=True, multilink=True, text_clean=True)
+                              use_punctuation=True, multilink=True,
+                              text_clean=True)
 
 nlp_model.model_from_scratch(True)
 # nlp_model.model_from_weights()
