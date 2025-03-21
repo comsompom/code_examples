@@ -1,3 +1,5 @@
+# pylint: disable=C0103
+# pylint: disable=W1514
 '''
 Day 8. Part 1
 '''
@@ -7,13 +9,15 @@ total_steps = 1
 direction_step = 0
 
 with open(elf_file) as elf_txt:
-    directions = elf_txt.readline().replace('\n', '').replace('L', '0').replace('R', '1')
-    directions_list = [x for x in directions]
+    directions = elf_txt.readline().replace(
+        '\n', '').replace('L', '0').replace('R', '1')
+    directions_list = list(directions)
     elf_txt.readline()
     for line in elf_txt.readlines():
         map_sublist = []
         main_point = line.replace('\n', '').replace(' ', '').split('=')[0]
-        left_right = line.replace('\n', '').replace(' ', '').split('=')[1].replace('(', '').replace(')', '').split(',')
+        left_right = line.replace('\n', '').replace(
+            ' ', '').split('=')[1].replace('(', '').replace(')', '').split(',')
         map_sublist.append(main_point)
         map_sublist.append(left_right)
         map_list.append(map_sublist)
