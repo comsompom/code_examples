@@ -1,3 +1,6 @@
+# pylint: disable=C0103
+# pylint: disable=W1514
+# pylint: disable=C0114
 elf_file = 'elf_text_9_1.txt'
 numbers_lists = []
 
@@ -10,7 +13,7 @@ with open(elf_file) as elf_txt:
 predict_list = []
 for line_list in numbers_lists:
     sub_predict_list = []
-    work_list = [x for x in line_list]
+    work_list = list(line_list)
     sub_predict_list.append(work_list)
     check_zeros = False
     while not check_zeros:
