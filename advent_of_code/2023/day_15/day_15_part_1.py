@@ -1,3 +1,7 @@
+# pylint: disable=C0103
+# pylint: disable=C0114
+# pylint: disable=W1514
+# pylint: disable=W0108
 elf_file = 'elf_text_15_1.txt'
 lines_list = []
 total_hash_sum = 0
@@ -9,7 +13,7 @@ with open(elf_file) as elf_txt:
         lines_list.extend(raw_line_list)
 
 for raw_line in lines_list:
-    check = list(map((lambda x: ord(x)), [x for x in raw_line]))
+    check = list(map((lambda x: ord(x)), list(raw_line)))
     hash_val = 0
     for x in check:
         hash_val += x
