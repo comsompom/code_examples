@@ -21,7 +21,7 @@ for line_list in numbers_lists:
         for x in range(0, len(work_list)-1):
             if x + 1 <= len(work_list):
                 temp_list.append( work_list[x + 1] - work_list[x])
-        work_list = [x for x in temp_list]
+        work_list = list(temp_list)
         sub_predict_list.append(work_list)
         check_val = 0
         for x in work_list:
