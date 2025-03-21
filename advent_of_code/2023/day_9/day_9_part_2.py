@@ -1,3 +1,7 @@
+# pylint: disable=C0103
+# pylint: disable=W1514
+# pylint: disable=C0114
+# pylint: disable=R0801
 elf_file = 'elf_text_9_2.txt'
 numbers_lists = []
 
@@ -10,7 +14,7 @@ with open(elf_file) as elf_txt:
 predict_list = []
 for line_list in numbers_lists:
     sub_predict_list = []
-    work_list = [x for x in line_list]
+    work_list = list(line_list)
     sub_predict_list.append(work_list)
     check_zeros = False
     while not check_zeros:
@@ -18,7 +22,7 @@ for line_list in numbers_lists:
         for x in range(0, len(work_list)-1):
             if x + 1 <= len(work_list):
                 temp_list.append( work_list[x + 1] - work_list[x])
-        work_list = [x for x in temp_list]
+        work_list = list(temp_list)
         sub_predict_list.append(work_list)
         check_val = 0
         for x in work_list:
@@ -30,12 +34,10 @@ for line_list in numbers_lists:
 
 total_sum = 0
 for prediction in predict_list:
-    # print(prediction)
     idx = 0
     predict_val = prediction[idx][0]
     while idx < len(prediction):
         predict_val = prediction[idx][0] - predict_val
-        # print(predict_val)
         idx += 1
     total_sum += predict_val
 
