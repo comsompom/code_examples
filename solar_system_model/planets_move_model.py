@@ -7,9 +7,10 @@
 # pylint: disable=R0913
 # pylint: disable=R0917
 # pylint: disable=W0621
-
-import pygame
+# pylint: disable=C0116
+# pylint: disable=C0200
 import time
+import pygame
 
 
 fps = 120  # fps
