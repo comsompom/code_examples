@@ -1,3 +1,13 @@
+# pylint: disable=C0301
+# pylint: disable=C0114
+# pylint: disable=E0401
+# pylint: disable=C0103
+# pylint: disable=C0115
+# pylint: disable=R0902
+# pylint: disable=R0913
+# pylint: disable=R0917
+# pylint: disable=W0621
+
 import pygame
 import time
 
