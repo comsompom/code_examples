@@ -1,3 +1,5 @@
+# pylint: disable=W0621
+# pylint: disable=C0103
 """
 1295. Find Numbers with Even Number of Digits
 
