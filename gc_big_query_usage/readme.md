@@ -108,7 +108,7 @@ python upload_csv_to_bigquery.py
 ```
 
 This will:
-- Generate a small dataset (150 records) for immediate testing
+- Upload free tier records available
 - Apply realistic price movements with mean reversion
 - Upload data directly to BigQuery using load_table_from_dataframe
 - Validate data before upload
@@ -342,7 +342,6 @@ This table is designed to work with various stock data sources:
 ## Recent Improvements
 
 ### Code Quality Enhancements
-- **Removed all emoji icons** from output messages for professional appearance
 - **Enhanced mathematical soundness** with proper division by zero handling
 - **Improved statistical validation** with minimum data point requirements
 - **Added comprehensive error handling** throughout all scripts
